@@ -1,0 +1,61 @@
+---
+output:
+  github_document:
+    html_preview: false
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r}
+#| include: false
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# polarssql
+
+<!-- badges: start -->
+[![polarssql status badge](https://rpolars.r-universe.dev/badges/polarssql)](https://rpolars.r-universe.dev)
+[![CRAN status](https://www.r-pkg.org/badges/version/polarssql)](https://CRAN.R-project.org/package=polarssql)
+<!-- badges: end -->
+
+`{polarssql}` is an experimental DBI-compliant interface to [Polars](https://www.pola.rs/).
+
+## Installation
+
+The [`polars`](https://rpolars.github.io/) R package and `{polarssql}`
+can be installed from [r-universe](https://rpolars.r-universe.dev/):
+
+```r
+Sys.setenv(NOT_CRAN = "true") # for installing the polars package with pre-built binary
+install.packages("polarssql", repos = c("https://rpolars.r-universe.dev", getOption("repos")))
+```
+
+## Example
+
+```{r}
+library(DBI)
+library(polars) # A bug of polars requires to load polars <https://github.com/pola-rs/r-polars/issues/495>
+
+con <- dbConnect(polarssql::polarssql())
+dbWriteTable(con, "mtcars", mtcars)
+
+# You can fetch all results:
+res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
+dbFetch(res)
+dbClearResult(res)
+
+# Or a chunk at a time
+res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
+while (!dbHasCompleted(res)) {
+  chunk <- dbFetch(res, n = 5)
+  print(nrow(chunk))
+}
+# Clear the result
+dbClearResult(res)
+```

@@ -1,0 +1,40 @@
+Package: polarssql
+Title: A 'polars' backend for 'DBI'.
+Description: DBI-compliant interface to 'polars'.
+Version: 0.0.0.9000
+Authors@R:
+    c(person("Tatsuya", "Shima", email = "ts1s1andn@gmail.com", role = c("aut", "cre")))
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends:
+    R (>= 4.2)
+Imports:
+    DBI,
+    methods,
+    polars (>= 0.10.0),
+    rlang
+Suggests:
+    testthat (>= 3.0.0),
+    DBItest
+Config/testthat/edition: 3
+Collate: 
+    'polarssql-package.R'
+    'Driver.R'
+    'Connection.R'
+    'Result.R'
+    'dbClearResult_Result.R'
+    'dbConnect_Driver.R'
+    'dbDisconnect_Connectsion.R'
+    'dbFetch_Result.R'
+    'dbHasCompleted_Result.R'
+    'dbIsValid_Connection.R'
+    'dbIsValid_Driver.R'
+    'dbIsValid_Result.R'
+    'dbSendQuery_Connection_character.R'
+    'dbWriteTable_Connection_character.R'
+    'register.R'
+    'show_Connection.R'
+    'show_Driver.R'
+    'show_Result.R'
