@@ -2,7 +2,16 @@
 #' @inheritParams DBI::dbIsValid
 #' @usage NULL
 dbIsValid_polarssql_result <- function(dbObj, ...) {
-  inherits(dbObj@query_plan, "LazyFrame")
+  valid <- FALSE
+
+  tryCatch(
+    {
+      valid <- !is_null_external_pointer(dbObj@query_plan)
+    },
+    error = function(c) {}
+  )
+
+  valid
 }
 
 #' @rdname DBI
