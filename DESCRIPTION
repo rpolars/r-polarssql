@@ -17,9 +17,9 @@ Imports:
     rlang
 Suggests:
     testthat (>= 3.0.0),
-    DBItest
+    DBItest (>= 1.7.3)
 Config/testthat/edition: 3
-Collate: 
+Collate:
     'polarssql-package.R'
     'Driver.R'
     'Connection.R'

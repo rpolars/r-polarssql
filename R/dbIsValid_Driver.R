@@ -7,8 +7,7 @@ dbIsValid_polarssql_driver <- function(dbObj, ...) {
   tryCatch(
     {
       con <- dbConnect(dbObj)
-      con@context$execute("show tables")
-      valid <- TRUE
+      valid <- dbIsValid(con)
     },
     error = function(c) {
     }
