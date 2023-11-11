@@ -25,7 +25,6 @@ polarssql_result <- function(
 
   env <- new.env(parent = emptyenv())
   env$rows_fetched <- 0
-  env$rows_want_to_fetch <- 0
   env$rows_affected <- 0
 
   if (is.null(statement)) {
@@ -38,6 +37,7 @@ polarssql_result <- function(
   }
 
   query_plan <- connection@context$execute(statement, eager = FALSE)
+  env$resultset <- query_plan$collect() # polars DataFrame
 
   new("polarssql_result",
     connection = connection,

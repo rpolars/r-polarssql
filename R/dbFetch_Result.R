@@ -15,14 +15,10 @@ dbFetch_polarssql_result <- function(res, n = -1, ...) {
     n <- NULL
   }
 
-  env <- res@env
-  lf <- res@query_plan
-
-  out <- lf$slice(offset = env$rows_fetched, length = n) |>
+  out <- res@env$resultset$slice(offset = res@env$rows_fetched, length = n) |>
     as.data.frame()
 
-  res@env$rows_want_to_fetch <- res@env$rows_want_to_fetch + (n %||% Inf)
-  res@env$rows_fetched <- env$rows_fetched + nrow(out)
+  res@env$rows_fetched <- res@env$rows_fetched + nrow(out)
 
   out
 }
