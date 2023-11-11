@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^\.devcontainer$
 ^README\.Rmd$
+^Taskfile\.yml$

@@ -1,0 +1,24 @@
+version: "3"
+
+env:
+  NOT_CRAN: "true"
+
+tasks:
+  setup-dev:
+    desc: Install tools for development.
+    deps:
+      - install-r-tools
+
+  install-r-tools:
+    internal: true
+    env:
+      PKG_SYSREQS: FALSE
+    desc: Install R packages for development.
+    cmds:
+      - Rscript -e
+        'pak::repo_add(
+          cran = "https://cloud.r-project.org/",
+          rpolars = "https://rpolars.r-universe.dev",
+          rdbi = "https://r-dbi.r-universe.dev"
+        );
+        pak::local_install_deps(dependencies = c("all", "Config/Needs/dev", "Config/Needs/website"))'
