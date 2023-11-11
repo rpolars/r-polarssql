@@ -18,7 +18,6 @@ tasks:
       - Rscript -e
         'pak::repo_add(
           cran = "https://cloud.r-project.org/",
-          rpolars = "https://rpolars.r-universe.dev",
-          rdbi = "https://r-dbi.r-universe.dev"
+          rpolars = "https://rpolars.r-universe.dev"
         );
         pak::local_install_deps(dependencies = c("all", "Config/Needs/dev", "Config/Needs/website"))'
