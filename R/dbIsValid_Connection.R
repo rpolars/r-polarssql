@@ -6,8 +6,7 @@ dbIsValid_polarssql_connection <- function(dbObj, ...) {
 
   tryCatch(
     {
-      dbObj@context$execute("show tables") # TODO: this may cause segfault
-      valid <- TRUE
+      valid <- !is_null_external_pointer(dbObj@context)
     },
     error = function(c) {}
   )
