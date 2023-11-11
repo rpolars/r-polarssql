@@ -21,6 +21,8 @@ setClass(
 polars_sql_result <- function(
     connection,
     statement) {
+  stopifnot(dbIsValid(connection))
+
   env <- new.env(parent = emptyenv())
   env$rows_fetched <- 0
   env$rows_want_to_fetch <- 0
