@@ -5,9 +5,9 @@ setOldClass(
   c("RPolarsSQLContext", "externalptr")
 )
 
-polars_sql_connection <- function() {
+polarssql_connection <- function() {
   new(
-    "polars_sql_connection",
+    "polarssql_connection",
     context = pl$SQLContext()
   )
 }
@@ -15,7 +15,7 @@ polars_sql_connection <- function() {
 #' @rdname DBI
 #' @export
 setClass(
-  "polars_sql_connection",
+  "polarssql_connection",
   contains = "DBIConnection",
   slots = list(
     context = "RPolarsSQLContext"

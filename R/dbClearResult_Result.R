@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbClearResult
 #' @usage NULL
-dbClearResult_polars_sql_result <- function(res, ...) {
+dbClearResult_polarssql_result <- function(res, ...) {
   res@env$rows_fetched <- 0
   res@env$rows_want_to_fetch <- 0
   res@env$rows_affected <- 0
@@ -14,4 +14,4 @@ dbClearResult_polars_sql_result <- function(res, ...) {
 
 #' @rdname DBI
 #' @export
-setMethod("dbClearResult", "polars_sql_result", dbClearResult_polars_sql_result)
+setMethod("dbClearResult", "polarssql_result", dbClearResult_polarssql_result)

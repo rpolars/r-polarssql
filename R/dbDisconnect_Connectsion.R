@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbDisconnect
 #' @usage NULL
-dbDisconnect_polars_sql_connection <- function(conn, ...) {
+dbDisconnect_polarssql_connection <- function(conn, ...) {
   if (!dbIsValid(conn)) {
     warning("Connection already closed.", call. = FALSE)
   }
@@ -13,4 +13,4 @@ dbDisconnect_polars_sql_connection <- function(conn, ...) {
 
 #' @rdname DBI
 #' @export
-setMethod("dbDisconnect", "polars_sql_connection", dbDisconnect_polars_sql_connection)
+setMethod("dbDisconnect", "polarssql_connection", dbDisconnect_polarssql_connection)

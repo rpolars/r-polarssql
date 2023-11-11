@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
-dbFetch_polars_sql_result <- function(res, n = -1, ...) {
+dbFetch_polarssql_result <- function(res, n = -1, ...) {
   if (length(n) != 1) {
     stop("need exactly one value in n")
   }
@@ -30,4 +30,4 @@ dbFetch_polars_sql_result <- function(res, n = -1, ...) {
 
 #' @rdname DBI
 #' @export
-setMethod("dbFetch", "polars_sql_result", dbFetch_polars_sql_result)
+setMethod("dbFetch", "polarssql_result", dbFetch_polarssql_result)

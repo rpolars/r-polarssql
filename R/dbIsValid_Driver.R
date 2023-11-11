@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbIsValid
 #' @usage NULL
-dbIsValid_polars_sql_driver <- function(dbObj, ...) {
+dbIsValid_polarssql_driver <- function(dbObj, ...) {
   valid <- FALSE
 
   tryCatch(
@@ -19,4 +19,4 @@ dbIsValid_polars_sql_driver <- function(dbObj, ...) {
 
 #' @rdname DBI
 #' @export
-setMethod("dbIsValid", "polars_sql_driver", dbIsValid_polars_sql_driver)
+setMethod("dbIsValid", "polarssql_driver", dbIsValid_polarssql_driver)

@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbIsValid
 #' @usage NULL
-dbIsValid_polars_sql_connection <- function(dbObj, ...) {
+dbIsValid_polarssql_connection <- function(dbObj, ...) {
   valid <- FALSE
 
   tryCatch(
@@ -17,4 +17,4 @@ dbIsValid_polars_sql_connection <- function(dbObj, ...) {
 
 #' @rdname DBI
 #' @export
-setMethod("dbIsValid", "polars_sql_connection", dbIsValid_polars_sql_connection)
+setMethod("dbIsValid", "polarssql_connection", dbIsValid_polarssql_connection)

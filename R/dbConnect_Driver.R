@@ -1,10 +1,10 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbConnect
 #' @usage NULL
-dbConnect_polars_sql_driver <- function(drv, ...) {
-  polars_sql_connection()
+dbConnect_polarssql_driver <- function(drv, ...) {
+  polarssql_connection()
 }
 
 #' @rdname DBI
 #' @export
-setMethod("dbConnect", "polars_sql_driver", dbConnect_polars_sql_driver)
+setMethod("dbConnect", "polarssql_driver", dbConnect_polarssql_driver)

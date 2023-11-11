@@ -8,17 +8,17 @@ setOldClass(
 #' @rdname DBI
 #' @export
 setClass(
-  "polars_sql_result",
+  "polarssql_result",
   contains = "DBIResult",
   slots = list(
-    connection = "polars_sql_connection",
+    connection = "polarssql_connection",
     statement = "character",
     env = "environment",
     query_plan = "LazyFrame"
   )
 )
 
-polars_sql_result <- function(
+polarssql_result <- function(
     connection,
     statement) {
   stopifnot(dbIsValid(connection))
@@ -30,7 +30,7 @@ polars_sql_result <- function(
 
   if (is.null(statement)) {
     return(
-      new("polars_sql_result",
+      new("polarssql_result",
         connection = connection,
         env = env
       )
@@ -39,7 +39,7 @@ polars_sql_result <- function(
 
   query_plan <- connection@context$execute(statement, eager = FALSE)
 
-  new("polars_sql_result",
+  new("polarssql_result",
     connection = connection,
     statement = statement,
     env = env,

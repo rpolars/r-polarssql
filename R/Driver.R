@@ -18,13 +18,13 @@ NULL
 #' polarssql::polarssql()
 #' }
 polarssql <- function() {
-  new("polars_sql_driver")
+  new("polarssql_driver")
 }
 
 #' @rdname DBI
 #' @export
 setClass(
-  "polars_sql_driver",
+  "polarssql_driver",
   contains = "DBIDriver",
   slots = list()
 )

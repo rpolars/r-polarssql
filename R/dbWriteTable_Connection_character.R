@@ -3,7 +3,7 @@
 #' @param overwrite Allow overwriting the destination table. Cannot be
 #'   `TRUE` if `append` is also `TRUE`.
 #' @usage NULL
-dbWriteTable_polars_sql_connection_character_data.frame <- function(
+dbWriteTable_polarssql_connection_character_data.frame <- function(
     conn, name, value, overwrite = FALSE, ...) {
   polarssql_register(conn, "{name}" := value, overwrite = overwrite) # nolint: object_name_linter.
 }
@@ -12,6 +12,6 @@ dbWriteTable_polars_sql_connection_character_data.frame <- function(
 #' @export
 setMethod(
   "dbWriteTable",
-  c("polars_sql_connection", "character", "data.frame"),
-  dbWriteTable_polars_sql_connection_character_data.frame
+  c("polarssql_connection", "character", "data.frame"),
+  dbWriteTable_polarssql_connection_character_data.frame
 )
