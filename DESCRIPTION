@@ -19,6 +19,7 @@ Imports:
     rlang
 Suggests:
     nanoarrow,
+    patrick,
     testthat (>= 3.0.0),
     DBItest (>= 1.7.3)
 Config/testthat/edition: 3
