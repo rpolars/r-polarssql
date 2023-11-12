@@ -80,3 +80,36 @@ dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC
 #> 2 32.4   4 78.7  66 4.08 2.200 19.47  1  1    4    1
 #> 3 30.4   4 95.1 113 3.77 1.513 16.90  1  1    5    2
 ```
+
+`{polarssql}` also provides functions that are simpler to use, inspired
+by the `{duckdb}` package,
+
+``` r
+library(polarssql)
+
+# These functions use the built-in connection by default, so we don't need to specify connection
+# Resgister a data.frame to the built-in connection
+polarssql_register(df = mtcars)
+
+# Get the query result as a polars DataFrame
+polarssql_query("SELECT * FROM df WHERE cyl = 4", result_type = "polars_df")
+#> shape: (11, 11)
+#> ┌──────┬─────┬───────┬───────┬───┬─────┬─────┬──────┬──────┐
+#> │ mpg  ┆ cyl ┆ disp  ┆ hp    ┆ … ┆ vs  ┆ am  ┆ gear ┆ carb │
+#> │ ---  ┆ --- ┆ ---   ┆ ---   ┆   ┆ --- ┆ --- ┆ ---  ┆ ---  │
+#> │ f64  ┆ f64 ┆ f64   ┆ f64   ┆   ┆ f64 ┆ f64 ┆ f64  ┆ f64  │
+#> ╞══════╪═════╪═══════╪═══════╪═══╪═════╪═════╪══════╪══════╡
+#> │ 22.8 ┆ 4.0 ┆ 108.0 ┆ 93.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
+#> │ 24.4 ┆ 4.0 ┆ 146.7 ┆ 62.0  ┆ … ┆ 1.0 ┆ 0.0 ┆ 4.0  ┆ 2.0  │
+#> │ 22.8 ┆ 4.0 ┆ 140.8 ┆ 95.0  ┆ … ┆ 1.0 ┆ 0.0 ┆ 4.0  ┆ 2.0  │
+#> │ 32.4 ┆ 4.0 ┆ 78.7  ┆ 66.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
+#> │ …    ┆ …   ┆ …     ┆ …     ┆ … ┆ …   ┆ …   ┆ …    ┆ …    │
+#> │ 27.3 ┆ 4.0 ┆ 79.0  ┆ 66.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
+#> │ 26.0 ┆ 4.0 ┆ 120.3 ┆ 91.0  ┆ … ┆ 0.0 ┆ 1.0 ┆ 5.0  ┆ 2.0  │
+#> │ 30.4 ┆ 4.0 ┆ 95.1  ┆ 113.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 5.0  ┆ 2.0  │
+#> │ 21.4 ┆ 4.0 ┆ 121.0 ┆ 109.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 2.0  │
+#> └──────┴─────┴───────┴───────┴───┴─────┴─────┴──────┴──────┘
+
+# Unregister the data.frame
+polarssql_unregister("df")
+```

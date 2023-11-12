@@ -72,3 +72,19 @@ polars::pl$LazyFrame(mtcars)$sink_parquet(tf)
 
 dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC LIMIT 3"))
 ```
+
+`{polarssql}` also provides functions that are simpler to use, inspired by the `{duckdb}` package,
+
+```{r}
+library(polarssql)
+
+# These functions use the built-in connection by default, so we don't need to specify connection
+# Resgister a data.frame to the built-in connection
+polarssql_register(df = mtcars)
+
+# Get the query result as a polars DataFrame
+polarssql_query("SELECT * FROM df WHERE cyl = 4", result_type = "polars_df")
+
+# Unregister the data.frame
+polarssql_unregister("df")
+```
