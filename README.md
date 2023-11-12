@@ -16,7 +16,7 @@ status](https://www.r-pkg.org/badges/version/polarssql)](https://CRAN.R-project.
 
 Polars is not an actual database, so does not support full `{DBI}`
 functionality. Please check [the Polars User
-Guild](https://pola-rs.github.io/polars/user-guide/sql/intro/) for
+Guide](https://pola-rs.github.io/polars/user-guide/sql/intro/) for
 supported SQL features.
 
 ## Installation
