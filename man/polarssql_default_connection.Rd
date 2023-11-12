@@ -13,16 +13,17 @@ A polarssql connection object
 Get the default built-in connection.
 }
 \examples{
-\dontshow{
-.old_wd <- setwd(tempdir())
-}
-polars::pl$LazyFrame(mtcars)$sink_parquet("mtcars.parquet")
+\dontshow{if (polars::pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+polarssql_default_connection()
 
-query <- "SELECT * FROM read_parquet('mtcars.parquet') LIMIT 5"
-con <- polarssql_default_connection()
+# Register a Table
+polarssql_register(mtcars = mtcars)
 
-polarssql_query(query, conn = con, result_type = "polars_df")
-\dontshow{
-setwd(.old_wd)
-}
+polarssql_default_connection()
+
+# Clean up
+polarssql_unregister("mtcars")
+
+polarssql_default_connection()
+\dontshow{\}) # examplesIf}
 }

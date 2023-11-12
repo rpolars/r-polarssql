@@ -13,7 +13,8 @@ polarssql_query(
 \arguments{
 \item{sql}{A SQL string.}
 
-\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}. Use the default connection by default.}
+\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}.
+Use the default built-in connection by default.}
 
 \item{result_type}{The type of result to return.
 \code{nanoarrow_array_stream} requires \link[nanoarrow:nanoarrow-package]{the nanoarrow package}.}
@@ -31,6 +32,7 @@ One of the following depending on \code{result_type}:
 Execute SQL query
 }
 \examples{
+\dontshow{if (polars::pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 polarssql_register(mtcars = mtcars)
 
 query <- "SELECT * FROM mtcars LIMIT 5"
@@ -48,4 +50,8 @@ polarssql_query(query, result_type = "polars_df")
 if (requireNamespace("nanoarrow", quietly = TRUE)) {
   polarssql_query(query, result_type = "nanoarrow_array_stream")
 }
+
+# Clean up
+polarssql_unregister("mtcars")
+\dontshow{\}) # examplesIf}
 }

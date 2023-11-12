@@ -16,7 +16,8 @@ polarssql_unregister(names, conn = polarssql_default_connection())
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Name-value pairs of \link{data.frame} like objects to register.}
 
-\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}. Use the default connection by default.}
+\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}.
+Use the default built-in connection by default.}
 
 \item{overwrite}{Should an existing registration be overwritten?}
 
@@ -30,10 +31,12 @@ Register data frames as tables
 }
 \examples{
 \dontshow{if (polars::pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-polarssql_register(df1 = mtcars, df2 = mtcars)
-polarssql_default_connection()
+con <- dbConnect(polarssql())
 
-polarssql_unregister(c("df1", "df2"))
-polarssql_default_connection()
+polarssql_register(df1 = mtcars, df2 = mtcars, conn = con)
+con
+
+polarssql_unregister(c("df1", "df2"), conn = con)
+con
 \dontshow{\}) # examplesIf}
 }

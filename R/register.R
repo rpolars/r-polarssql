@@ -1,17 +1,20 @@
 #' Register data frames as tables
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Name-value pairs of [data.frame] like objects to register.
-#' @param conn A polarssql connection, created by [polarssql()]. Use the default connection by default.
+#' @param conn A polarssql connection, created by [polarssql()].
+#' Use the default built-in connection by default.
 #' @param names Names of the tables to unregister.
 #' @param overwrite Should an existing registration be overwritten?
 #' @return These functions are called for their side effect.
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql
-#' polarssql_register(df1 = mtcars, df2 = mtcars)
-#' polarssql_default_connection()
+#' con <- dbConnect(polarssql())
 #'
-#' polarssql_unregister(c("df1", "df2"))
-#' polarssql_default_connection()
+#' polarssql_register(df1 = mtcars, df2 = mtcars, conn = con)
+#' con
+#'
+#' polarssql_unregister(c("df1", "df2"), conn = con)
+#' con
 polarssql_register <- function(..., conn = polarssql_default_connection(), overwrite = FALSE) {
   stopifnot(dbIsValid(conn))
 

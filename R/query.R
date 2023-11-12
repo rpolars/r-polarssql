@@ -10,7 +10,7 @@
 #' - [data.frame] (when `result_type = "data_frame"`)
 #' - [nanoarrow_array_stream][nanoarrow::as_nanoarrow_array_stream()]
 #' @export
-#' @examples
+#' @examplesIf polars::pl$polars_info()$features$sql
 #' polarssql_register(mtcars = mtcars)
 #'
 #' query <- "SELECT * FROM mtcars LIMIT 5"
@@ -28,6 +28,9 @@
 #' if (requireNamespace("nanoarrow", quietly = TRUE)) {
 #'   polarssql_query(query, result_type = "nanoarrow_array_stream")
 #' }
+#'
+#' # Clean up
+#' polarssql_unregister("mtcars")
 polarssql_query <- function(
     sql,
     conn = polarssql_default_connection(),
