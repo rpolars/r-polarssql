@@ -19,9 +19,8 @@ builtin_connection <- new.env(parent = emptyenv())
 #'
 #' polarssql_default_connection()
 polarssql_default_connection <- function() {
-  if (!exists("con", builtin_connection)) {
-    con <- dbConnect(polarssql())
-    builtin_connection$con <- con
+  if (!exists("con", builtin_connection) || !dbIsValid(builtin_connection$con)) {
+    builtin_connection$con <- dbConnect(polarssql())
   }
 
   builtin_connection$con
