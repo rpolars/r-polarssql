@@ -5,6 +5,8 @@ Version: 0.0.0.9000
 Authors@R:
     c(person("Tatsuya", "Shima", email = "ts1s1andn@gmail.com", role = c("aut", "cre")))
 License: MIT + file LICENSE
+URL: https://rpolars.github.io/r-polarssql/, https://github.com/rpolars/r-polarssql
+BugReports: https://github.com/rpolars/r-polarssql/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

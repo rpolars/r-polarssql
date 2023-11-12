@@ -5,3 +5,6 @@
 ^README\.Rmd$
 ^Taskfile\.yml$
 ^\.editorconfig$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
