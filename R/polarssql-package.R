@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @aliases polarssql-package
 "_PACKAGE"
 
 ## usethis namespace: start

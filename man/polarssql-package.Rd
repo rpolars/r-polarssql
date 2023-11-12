@@ -2,8 +2,8 @@
 % Please edit documentation in R/polarssql-package.R
 \docType{package}
 \name{polarssql-package}
-\alias{polarssql}
 \alias{polarssql-package}
+\alias{_PACKAGE}
 \title{polarssql: A 'polars' backend for 'DBI'.}
 \description{
 DBI-compliant interface to 'polars'.
