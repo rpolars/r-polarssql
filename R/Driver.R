@@ -12,7 +12,7 @@ NULL
 #' [polarssql()] creates a DBI driver instance.
 #'
 #' @export
-#' @examplesIf pl$polars_info()$features$sql
+#' @examplesIf polars::pl$polars_info()$features$sql
 #' polarssql()
 polarssql <- function() {
   if (!isTRUE(pl$polars_info()$features$sql)) {

@@ -8,6 +8,15 @@
 \description{
 DBI-compliant interface to 'polars'.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://rpolars.github.io/r-polarssql/}
+  \item \url{https://github.com/rpolars/r-polarssql}
+  \item Report bugs at \url{https://github.com/rpolars/r-polarssql/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Tatsuya Shima \email{ts1s1andn@gmail.com}
 

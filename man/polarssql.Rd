@@ -10,7 +10,7 @@ polarssql()
 \code{\link[=polarssql]{polarssql()}} creates a DBI driver instance.
 }
 \examples{
-\dontshow{if (pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (polars::pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 polarssql()
 \dontshow{\}) # examplesIf}
 }
