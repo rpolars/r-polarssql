@@ -3,5 +3,12 @@
 	"features": {
 		"ghcr.io/rocker-org/devcontainer-features/r-history:0": {},
 		"ghcr.io/eitsupi/devcontainer-features/go-task:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"EditorConfig.EditorConfig"
+			]
+		}
 	}
 }

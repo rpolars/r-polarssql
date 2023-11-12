@@ -4,3 +4,4 @@
 ^\.devcontainer$
 ^README\.Rmd$
 ^Taskfile\.yml$
+^\.editorconfig$
