@@ -25,6 +25,7 @@ These functions are called for their side effect.
 Register data frames as tables
 }
 \examples{
+\dontshow{if (pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 con <- dbConnect(polarssql())
 
 polarssql_register(con, df1 = mtcars, df2 = mtcars)
@@ -32,4 +33,5 @@ con
 
 polarssql_unregister(con, c("df1", "df2"))
 con
+\dontshow{\}) # examplesIf}
 }

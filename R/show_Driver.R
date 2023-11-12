@@ -3,10 +3,12 @@
 #' @usage NULL
 show_polarssql_driver <- function(object) {
   cat("<polarssql_driver>\n")
-  # TODO: Print more details
+  show(pl$polars_info())
 
   invisible(NULL)
 }
+
+
 #' @rdname DBI
 #' @export
 setMethod("show", "polarssql_driver", show_polarssql_driver)

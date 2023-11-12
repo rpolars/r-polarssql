@@ -6,7 +6,7 @@
 #' @param overwrite Should an existing registration be overwritten?
 #' @return These functions are called for their side effect.
 #' @export
-#' @examples
+#' @examplesIf pl$polars_info()$features$sql
 #' con <- dbConnect(polarssql())
 #'
 #' polarssql_register(con, df1 = mtcars, df2 = mtcars)

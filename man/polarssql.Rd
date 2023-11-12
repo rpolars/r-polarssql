@@ -2,16 +2,15 @@
 % Please edit documentation in R/Driver.R
 \name{polarssql}
 \alias{polarssql}
-\title{polars driver}
+\title{polarssql driver}
 \usage{
 polarssql()
 }
 \description{
-TBD.
+\code{\link[=polarssql]{polarssql()}} creates a DBI driver instance.
 }
 \examples{
-\dontrun{
-library(DBI)
-polarssql::polarssql()
-}
+\dontshow{if (pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+polarssql()
+\dontshow{\}) # examplesIf}
 }
