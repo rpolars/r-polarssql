@@ -45,15 +45,11 @@ polarssql_query <- function(
 
   lf <- conn@context$execute(sql, eager = FALSE)
 
-  if (result_type == "data_frame") {
-    out <- lf |> as.data.frame()
-  } else if (result_type == "polars_df") {
-    out <- lf$collect()
-  } else if (result_type == "nanoarrow_array_stream") {
-    out <- lf$collect() |> nanoarrow::as_nanoarrow_array_stream()
-  } else {
-    out <- lf
-  }
-
-  out
+  switch(result_type,
+    "polars_lf" = lf,
+    "polars_df" = lf$collect(),
+    "data_frame" = lf |> as.data.frame(),
+    "nanoarrow_array_stream" = lf$collect() |>
+      nanoarrow::as_nanoarrow_array_stream()
+  )
 }
