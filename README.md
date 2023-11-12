@@ -32,7 +32,7 @@ library(DBI)
 con <- dbConnect(polarssql::polarssql())
 dbWriteTable(con, "mtcars", mtcars)
 
-# You can fetch all results:
+# We can fetch all results:
 res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
 dbFetch(res)
 #>     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
@@ -63,4 +63,15 @@ while (!dbHasCompleted(res)) {
 
 # Clear the result
 dbClearResult(res)
+
+# We can use table functions to read files directly:
+tf <- tempfile(fileext = ".parquet")
+on.exit(unlink(tf))
+polars::pl$LazyFrame(mtcars)$sink_parquet(tf)
+
+dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC LIMIT 3"))
+#>    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#> 1 33.9   4 71.1  65 4.22 1.835 19.90  1  1    4    1
+#> 2 32.4   4 78.7  66 4.08 2.200 19.47  1  1    4    1
+#> 3 30.4   4 95.1 113 3.77 1.513 16.90  1  1    5    2
 ```
