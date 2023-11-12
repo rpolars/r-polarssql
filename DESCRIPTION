@@ -18,6 +18,7 @@ Imports:
     polars (>= 0.10.1),
     rlang
 Suggests:
+    nanoarrow,
     testthat (>= 3.0.0),
     DBItest (>= 1.7.3)
 Config/testthat/edition: 3
@@ -42,6 +43,7 @@ Collate:
     'dbRemoveTable_Connection_character.R'
     'dbSendQuery_Connection_character.R'
     'dbWriteTable_Connection_character.R'
+    'query.R'
     'register.R'
     'show_Connection.R'
     'show_Driver.R'

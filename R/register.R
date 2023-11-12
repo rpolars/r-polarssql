@@ -1,6 +1,6 @@
 #' Register data frames as tables
 #'
-#' @param conn A polars sql connection, created by [polarssql()].
+#' @param conn A polarssql connection, created by [polarssql()].
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Name-value pairs of [data.frame] like objects to register.
 #' @param names Names of the tables to unregister.
 #' @param overwrite Should an existing registration be overwritten?

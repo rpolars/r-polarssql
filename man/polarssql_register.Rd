@@ -10,7 +10,7 @@ polarssql_register(conn, ..., overwrite = FALSE)
 polarssql_unregister(conn, names)
 }
 \arguments{
-\item{conn}{A polars sql connection, created by \code{\link[=polarssql]{polarssql()}}.}
+\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Name-value pairs of \link{data.frame} like objects to register.}
 
