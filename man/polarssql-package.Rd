@@ -6,7 +6,7 @@
 \alias{polarssql-package}
 \title{polarssql: A 'polars' backend for 'DBI'.}
 \description{
-What the package does (one paragraph).
+DBI-compliant interface to 'polars'.
 }
 \author{
 \strong{Maintainer}: Tatsuya Shima \email{ts1s1andn@gmail.com}

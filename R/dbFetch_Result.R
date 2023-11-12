@@ -2,6 +2,8 @@
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetch_polarssql_result <- function(res, n = -1, ...) {
+  stopifnot(dbIsValid(res))
+
   if (length(n) != 1) {
     stop("need exactly one value in n")
   }
