@@ -13,7 +13,7 @@ Depends:
 Imports:
     DBI,
     methods,
-    polars (>= 0.10.0),
+    polars (>= 0.10.1),
     rlang
 Suggests:
     testthat (>= 3.0.0),

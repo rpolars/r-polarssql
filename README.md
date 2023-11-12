@@ -28,7 +28,6 @@ install.packages("polarssql", repos = c("https://rpolars.r-universe.dev", getOpt
 
 ``` r
 library(DBI)
-library(polars) # A bug of polars requires to load polars <https://github.com/pola-rs/r-polars/issues/495>
 
 con <- dbConnect(polarssql::polarssql())
 dbWriteTable(con, "mtcars", mtcars)
@@ -48,6 +47,8 @@ dbFetch(res)
 #> 9  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
 #> 10 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
 #> 11 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+
+# Clear the result
 dbClearResult(res)
 
 # Or a chunk at a time
@@ -59,6 +60,7 @@ while (!dbHasCompleted(res)) {
 #> [1] 5
 #> [1] 5
 #> [1] 1
+
 # Clear the result
 dbClearResult(res)
 ```
