@@ -43,6 +43,7 @@ Collate:
     'dbRemoveTable_Connection_character.R'
     'dbSendQuery_Connection_character.R'
     'dbWriteTable_Connection_character.R'
+    'default_connection.R'
     'query.R'
     'register.R'
     'show_Connection.R'

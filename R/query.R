@@ -11,23 +11,22 @@
 #' - [nanoarrow_array_stream][nanoarrow::as_nanoarrow_array_stream()]
 #' @export
 #' @examples
-#' con <- dbConnect(polarssql())
-#' polarssql_register(con, mtcars = mtcars)
+#' polarssql_register(mtcars = mtcars)
 #'
 #' query <- "SELECT * FROM mtcars LIMIT 5"
 #'
 #' # Returns a polars LazyFrame
-#' polarssql_query(query, con)
+#' polarssql_query(query)
 #'
 #' # Returns a data.frame
-#' polarssql_query(query, con, result_type = "data_frame")
+#' polarssql_query(query, result_type = "data_frame")
 #'
 #' # Returns a polars DataFrame
-#' polarssql_query(query, con, result_type = "polars_df")
+#' polarssql_query(query, result_type = "polars_df")
 #'
 #' # Returns a nanoarrow_array_stream
 #' if (requireNamespace("nanoarrow", quietly = TRUE)) {
-#'   polarssql_query(query, con, result_type = "nanoarrow_array_stream")
+#'   polarssql_query(query, result_type = "nanoarrow_array_stream")
 #' }
 polarssql_query <- function(
     sql,
@@ -54,35 +53,4 @@ polarssql_query <- function(
   }
 
   out
-}
-
-
-builtin_connection <- new.env(parent = emptyenv())
-
-
-#' Get the default connection
-#'
-#' Get the default built-in connection.
-#' @return A polarssql connection object
-#' @export
-#' @examples
-#' \dontshow{
-#' .old_wd <- setwd(tempdir())
-#' }
-#' polars::pl$LazyFrame(mtcars)$sink_parquet("mtcars.parquet")
-#'
-#' query <- "SELECT * FROM read_parquet('mtcars.parquet') LIMIT 5"
-#' con <- polarssql_default_connection()
-#'
-#' polarssql_query(query, conn = con, result_type = "polars_df")
-#' \dontshow{
-#' setwd(.old_wd)
-#' }
-polarssql_default_connection <- function() {
-  if (!exists("con", builtin_connection)) {
-    con <- dbConnect(polarssql())
-    builtin_connection$con <- con
-  }
-
-  builtin_connection$con
 }

@@ -13,7 +13,7 @@ polarssql_query(
 \arguments{
 \item{sql}{A SQL string.}
 
-\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}.}
+\item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}. Use the default connection by default.}
 
 \item{result_type}{The type of result to return.
 \code{nanoarrow_array_stream} requires \link[nanoarrow:nanoarrow-package]{the nanoarrow package}.}
@@ -31,22 +31,21 @@ One of the following depending on \code{result_type}:
 Execute SQL query
 }
 \examples{
-con <- dbConnect(polarssql())
-polarssql_register(con, mtcars = mtcars)
+polarssql_register(mtcars = mtcars)
 
 query <- "SELECT * FROM mtcars LIMIT 5"
 
 # Returns a polars LazyFrame
-polarssql_query(query, con)
+polarssql_query(query)
 
 # Returns a data.frame
-polarssql_query(query, con, result_type = "data_frame")
+polarssql_query(query, result_type = "data_frame")
 
 # Returns a polars DataFrame
-polarssql_query(query, con, result_type = "polars_df")
+polarssql_query(query, result_type = "polars_df")
 
 # Returns a nanoarrow_array_stream
 if (requireNamespace("nanoarrow", quietly = TRUE)) {
-  polarssql_query(query, con, result_type = "nanoarrow_array_stream")
+  polarssql_query(query, result_type = "nanoarrow_array_stream")
 }
 }
