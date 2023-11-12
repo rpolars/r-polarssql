@@ -14,10 +14,15 @@ status](https://www.r-pkg.org/badges/version/polarssql)](https://CRAN.R-project.
 `{polarssql}` is an experimental DBI-compliant interface to
 [Polars](https://www.pola.rs/).
 
+Polars is not an actual database, so does not support full `{DBI}`
+functionality. Please check [the Polars User
+Guild](https://pola-rs.github.io/polars/user-guide/sql/intro/) for
+supported SQL features.
+
 ## Installation
 
 The [`polars`](https://rpolars.github.io/) R package and `{polarssql}`
-can be installed from [r-universe](https://rpolars.r-universe.dev/):
+can be installed from [R-universe](https://rpolars.r-universe.dev/):
 
 ``` r
 Sys.setenv(NOT_CRAN = "true") # for installing the polars package with pre-built binary
