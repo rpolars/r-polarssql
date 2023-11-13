@@ -18,6 +18,8 @@ Imports:
     polars (>= 0.10.1),
     rlang
 Suggests:
+    dplyr,
+    dbplyr,
     nanoarrow,
     patrick,
     testthat (>= 3.0.0),
@@ -45,9 +47,11 @@ Collate:
     'dbSendQuery_Connection_character.R'
     'dbWriteTable_Connection_character.R'
     'default_connection.R'
+    'pkg-dbplyr.R'
     'query.R'
     'register.R'
     'show_Connection.R'
     'show_Driver.R'
     'show_Result.R'
     'utils.R'
+    'zzz.R'
