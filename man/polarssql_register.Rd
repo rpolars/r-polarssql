@@ -24,7 +24,7 @@ Use the default built-in connection by default.}
 \item{names}{Names of the tables to unregister.}
 }
 \value{
-These functions are called for their side effect.
+The polarssql connection invisibly.
 }
 \description{
 Register data frames as tables

@@ -7,7 +7,7 @@
 \usage{
 simulate_polarssql(...)
 
-compute.tbl_polarssql_connection(x, eager = TRUE)
+\method{compute}{tbl_polarssql_connection}(x, eager = TRUE)
 }
 \arguments{
 \item{...}{Any parameters to be forwarded}

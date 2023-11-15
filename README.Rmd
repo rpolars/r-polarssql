@@ -95,11 +95,10 @@ And, basic supports for `{dbplyr}` is also implemented.
 ```{r}
 library(dplyr, warn.conflicts = FALSE)
 
-# Resgister a data.frame to the built-in connection
-polarssql_register(df = mtcars)
-
-# Query the registered table via dbplyr
-tbl(polarssql_default_connection(), "df") |>
+# Resgister a data.frame to the built-in connection, and query it via dbplyr
+mtcars |>
+  polarssql_register(df = _) |>
+  tbl("df") |>
   filter(cyl == 4) |>
   compute()
 

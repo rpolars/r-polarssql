@@ -5,7 +5,7 @@
 #' Use the default built-in connection by default.
 #' @param names Names of the tables to unregister.
 #' @param .overwrite Should an existing registration be overwritten?
-#' @return These functions are called for their side effect.
+#' @return The polarssql connection invisibly.
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql
 #' con <- dbConnect(polarssql())
@@ -36,7 +36,7 @@ polarssql_register <- function(..., .conn = polarssql_default_connection(), .ove
 
   exec(context$register_many, !!!dots)
 
-  invisible(TRUE)
+  invisible(.conn)
 }
 
 
@@ -57,5 +57,5 @@ polarssql_unregister <- function(names, conn = polarssql_default_connection()) {
   }
 
   context$unregister(names)
-  invisible(TRUE)
+  invisible(conn)
 }
