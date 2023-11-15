@@ -2,8 +2,8 @@
 % Please edit documentation in R/Driver.R, R/Connection.R,
 %   R/Result.R, R/dbClearResult_Result.R, R/dbConnect_Driver.R,
 %   R/dbDisconnect_Connectsion.R, R/dbExistsTable_Connection_character.R,
-%   R/dbFetch_Result.R, R/dbHasCompleted_Result.R,
-%   R/dbIsValid_Connection.R, R/dbIsValid_Driver.R,
+%   R/dbFetch_Result.R, R/dbGetRowsAffected_Result.R,
+%   R/dbHasCompleted_Result.R, R/dbIsValid_Connection.R, R/dbIsValid_Driver.R,
 %   R/dbIsValid_Result.R, R/dbListFields_Connection_character.R,
 %   R/dbListTables_Connection.R, R/dbQuoteIdentifier_Connection_character.R,
 %   R/dbQuoteString_Connection_character.R,
@@ -26,6 +26,8 @@
 \alias{dbExistsTable,polarssql_connection,character-method}
 \alias{dbFetch_polarssql_result}
 \alias{dbFetch,polarssql_result-method}
+\alias{dbGetRowsAffected_polarssql_result}
+\alias{dbGetRowsAffected,polarssql_result-method}
 \alias{dbHasCompleted_polarssql_result}
 \alias{dbHasCompleted,polarssql_result-method}
 \alias{dbIsValid_polarssql_connection}
@@ -65,6 +67,8 @@
 \S4method{dbExistsTable}{polarssql_connection,character}(conn, name, ...)
 
 \S4method{dbFetch}{polarssql_result}(res, n = -1, ...)
+
+\S4method{dbGetRowsAffected}{polarssql_result}(res, ...)
 
 \S4method{dbHasCompleted}{polarssql_result}(res, ...)
 

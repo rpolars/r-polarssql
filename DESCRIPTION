@@ -35,6 +35,7 @@ Collate:
     'dbDisconnect_Connectsion.R'
     'dbExistsTable_Connection_character.R'
     'dbFetch_Result.R'
+    'dbGetRowsAffected_Result.R'
     'dbHasCompleted_Result.R'
     'dbIsValid_Connection.R'
     'dbIsValid_Driver.R'
