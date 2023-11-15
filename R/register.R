@@ -1,27 +1,27 @@
 #' Register data frames as tables
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Name-value pairs of [data.frame] like objects to register.
-#' @param conn A polarssql connection, created by [polarssql()].
+#' @param .conn,conn A polarssql connection, created by [polarssql()].
 #' Use the default built-in connection by default.
 #' @param names Names of the tables to unregister.
-#' @param overwrite Should an existing registration be overwritten?
+#' @param .overwrite Should an existing registration be overwritten?
 #' @return These functions are called for their side effect.
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql
 #' con <- dbConnect(polarssql())
 #'
-#' polarssql_register(df1 = mtcars, df2 = mtcars, conn = con)
+#' polarssql_register(df1 = mtcars, df2 = mtcars, .conn = con)
 #' con
 #'
 #' polarssql_unregister(c("df1", "df2"), conn = con)
 #' con
-polarssql_register <- function(..., conn = polarssql_default_connection(), overwrite = FALSE) {
-  stopifnot(dbIsValid(conn))
+polarssql_register <- function(..., .conn = polarssql_default_connection(), .overwrite = FALSE) {
+  stopifnot(dbIsValid(.conn))
 
-  context <- conn@context
+  context <- .conn@context
   dots <- list2(...)
 
-  if (!isTRUE(overwrite)) {
+  if (!isTRUE(.overwrite)) {
     existing_tables <- context$tables()
     new_tables <- names(dots)
     if (any(new_tables %in% existing_tables)) {
