@@ -79,12 +79,30 @@ dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC
 library(polarssql)
 
 # These functions use the built-in connection by default, so we don't need to specify connection
+
 # Resgister a data.frame to the built-in connection
 polarssql_register(df = mtcars)
 
 # Get the query result as a polars DataFrame
 polarssql_query("SELECT * FROM df WHERE cyl = 4", result_type = "polars_df")
 
-# Unregister the data.frame
+# Unregister the table
+polarssql_unregister("df")
+```
+
+And, basic supports for `{dbplyr}` is also implemented.
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+
+# Resgister a data.frame to the built-in connection
+polarssql_register(df = mtcars)
+
+# Query the registered table via dbplyr
+tbl(polarssql_default_connection(), "df") |>
+  filter(cyl == 4) |>
+  compute()
+
+# Unregister the table
 polarssql_unregister("df")
 ```

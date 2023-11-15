@@ -2,12 +2,20 @@
 % Please edit documentation in R/pkg-dbplyr.R
 \name{dbplyr-backend-polarssql}
 \alias{simulate_polarssql}
+\alias{compute.tbl_polarssql_connection}
 \title{polarssql backend for dbplyr}
 \usage{
 simulate_polarssql(...)
+
+compute.tbl_polarssql_connection(x, eager = TRUE)
 }
 \arguments{
 \item{...}{Any parameters to be forwarded}
+
+\item{x}{A lazy data frame backed by a database query.}
+
+\item{eager}{if \code{TRUE} (default), return a polars DataFrame,
+otherwise return a polars LazyFrame.}
 }
 \description{
 Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbplyr:tbl_lazy]{dbplyr::tbl_lazy()}} or
@@ -27,8 +35,16 @@ tbl(con, "mtcars") |>
   collect()
 
 dbplyr::tbl_lazy(mtcars, simulate_polarssql(), name = "mtcars") |>
- filter(cyl == 4) |>
- arrange(desc(mpg)) |>
- head(n = 3)
+  filter(cyl == 4) |>
+  arrange(desc(mpg)) |>
+  head(n = 3)
+
+# Unlike other dbplyr backends, `compute` has a special behavior.
+# It returns a polars DataFrame or LazyFrame.
+tbl(con, "mtcars") |>
+  filter(cyl == 4) |>
+  arrange(desc(mpg)) |>
+  head(n = 3) |>
+  compute()
 \dontshow{\}) # examplesIf}
 }
