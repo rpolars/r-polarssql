@@ -6,7 +6,7 @@ dbIsValid_polarssql_result <- function(dbObj, ...) {
 
   tryCatch(
     {
-      valid <- !is_null_external_pointer(dbObj@query_plan)
+      valid <- !is_null_external_pointer(dbObj@env$query_plan)
     },
     error = function(c) {}
   )

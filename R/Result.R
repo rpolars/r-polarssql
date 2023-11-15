@@ -1,10 +1,6 @@
 #' @include Connection.R
 NULL
 
-setOldClass(
-  c("LazyFrame", "externalptr")
-)
-
 #' @rdname DBI
 #' @export
 setClass(
@@ -13,8 +9,7 @@ setClass(
   slots = list(
     connection = "polarssql_connection",
     statement = "character",
-    env = "environment",
-    query_plan = "LazyFrame"
+    env = "environment"
   )
 )
 
@@ -36,13 +31,12 @@ polarssql_result <- function(
     )
   }
 
-  query_plan <- connection@env$context$execute(statement, eager = FALSE)
-  env$resultset <- query_plan$collect() # polars DataFrame
+  env$query_plan <- connection@env$context$execute(statement, eager = FALSE)
+  env$resultset <- env$query_plan$collect() # polars DataFrame
 
   new("polarssql_result",
     connection = connection,
     statement = statement,
-    env = env,
-    query_plan = query_plan
+    env = env
   )
 }

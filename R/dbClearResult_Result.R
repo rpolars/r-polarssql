@@ -6,9 +6,9 @@ dbClearResult_polarssql_result <- function(res, ...) {
   res@env$rows_affected <- 0
 
   res@statement <- NA_character_
-  res@query_plan <- pl$LazyFrame()
+  res@env$query_plan <- pl$LazyFrame()
 
-  res@env$resultset <- res@query_plan$collect()
+  res@env$resultset <- res@env$query_plan$collect()
 
   invisible(TRUE)
 }
