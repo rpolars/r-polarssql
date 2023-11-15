@@ -5,7 +5,7 @@
 #' converting to live access.
 #' @name dbplyr-backend-polarssql
 #' @aliases NULL
-#' @examplesIf rlang::is_installed("dbplyr")
+#' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
 #' con <- DBI::dbConnect(polarssql())
 #' DBI::dbWriteTable(con, "mtcars", mtcars)

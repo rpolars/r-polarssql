@@ -15,7 +15,7 @@ Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbp
 converting to live access.
 }
 \examples{
-\dontshow{if (rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(dplyr, warn.conflicts = FALSE)
 con <- DBI::dbConnect(polarssql())
 DBI::dbWriteTable(con, "mtcars", mtcars)
