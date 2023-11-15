@@ -4,7 +4,7 @@
 #'   `TRUE` if `append` is also `TRUE`.
 #' @usage NULL
 dbWriteTable_polarssql_connection_character_data.frame <- function(
-    conn, name, value, overwrite = FALSE, ...) {
+    conn, name, value, ..., overwrite = FALSE) {
   polarssql_register("{name}" := value, .conn = conn, .overwrite = overwrite) # nolint: object_name_linter.
 }
 

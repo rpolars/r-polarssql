@@ -86,7 +86,7 @@
 
 \S4method{dbSendQuery}{polarssql_connection,character}(conn, statement, ...)
 
-\S4method{dbWriteTable}{polarssql_connection,character,data.frame}(conn, name, value, overwrite = FALSE, ...)
+\S4method{dbWriteTable}{polarssql_connection,character,data.frame}(conn, name, value, ..., overwrite = FALSE)
 
 \S4method{show}{polarssql_connection}(object)
 
