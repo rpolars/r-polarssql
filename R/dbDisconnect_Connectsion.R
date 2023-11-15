@@ -6,7 +6,9 @@ dbDisconnect_polarssql_connection <- function(conn, ...) {
     warning("Connection already closed.", call. = FALSE)
   }
 
-  # TODO: Free resources
+  conn@env$context <- pl$SQLContext()
+  conn@env$closed <- TRUE
+
   invisible(TRUE)
 }
 

@@ -43,7 +43,7 @@ polarssql_query <- function(
     stop("Please install the `nanoarrow` package to convert to `nanoarrow_array_stream`.")
   }
 
-  lf <- conn@context$execute(sql, eager = FALSE)
+  lf <- conn@env$context$execute(sql, eager = FALSE)
 
   switch(result_type,
     "polars_lf" = lf,

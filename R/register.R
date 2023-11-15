@@ -18,7 +18,7 @@
 polarssql_register <- function(..., .conn = polarssql_default_connection(), .overwrite = FALSE) {
   stopifnot(dbIsValid(.conn))
 
-  context <- .conn@context
+  context <- .conn@env$context
   dots <- list2(...)
 
   if (!isTRUE(.overwrite)) {
@@ -45,7 +45,7 @@ polarssql_register <- function(..., .conn = polarssql_default_connection(), .ove
 polarssql_unregister <- function(names, conn = polarssql_default_connection()) {
   stopifnot(dbIsValid(conn))
 
-  context <- conn@context
+  context <- conn@env$context
   existing_tables <- context$tables()
 
   if (!all(names %in% existing_tables)) {

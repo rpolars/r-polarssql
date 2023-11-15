@@ -10,7 +10,7 @@ dbListFields_polarssql_connection_character <- function(conn, name, ...) {
 
   query <- paste0("SELECT * FROM ", dbQuoteIdentifier(conn, name))
 
-  conn@context$execute(query, eager = FALSE)$columns
+  conn@env$context$execute(query, eager = FALSE)$columns
 }
 
 

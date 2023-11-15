@@ -4,7 +4,7 @@
 dbListTables_polarssql_connection <- function(conn, ...) {
   stopifnot(dbIsValid(conn))
 
-  conn@context$tables()
+  conn@env$context$tables()
 }
 
 

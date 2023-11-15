@@ -1,14 +1,15 @@
 #' @include Driver.R
 NULL
 
-setOldClass(
-  c("RPolarsSQLContext", "externalptr")
-)
 
 polarssql_connection <- function() {
+  env <- new.env(parent = emptyenv())
+  env$context <- pl$SQLContext()
+  env$closed <- FALSE
+
   new(
     "polarssql_connection",
-    context = pl$SQLContext()
+    env = env
   )
 }
 
@@ -18,7 +19,7 @@ setClass(
   "polarssql_connection",
   contains = "DBIConnection",
   slots = list(
-    context = "RPolarsSQLContext"
+    env = "environment"
   )
 )
 

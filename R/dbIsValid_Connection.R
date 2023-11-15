@@ -4,9 +4,13 @@
 dbIsValid_polarssql_connection <- function(dbObj, ...) {
   valid <- FALSE
 
+  if (dbObj@env$closed) {
+    return(valid)
+  }
+
   tryCatch(
     {
-      valid <- !is_null_external_pointer(dbObj@context)
+      valid <- !is_null_external_pointer(dbObj@env$context)
     },
     error = function(c) {}
   )

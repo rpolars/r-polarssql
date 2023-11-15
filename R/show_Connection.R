@@ -3,7 +3,12 @@
 #' @usage NULL
 show_polarssql_connection <- function(object) {
   cat("<polarssql_connection>\n")
-  cat("  tables: ", object@context$tables(), "\n")
+
+  if (dbIsValid(object)) {
+    cat("  tables: ", object@env$context$tables(), "\n")
+  } else {
+    cat("  Disconnected\n")
+  }
 
   invisible(NULL)
 }
