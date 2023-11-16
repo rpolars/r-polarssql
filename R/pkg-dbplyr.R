@@ -3,27 +3,27 @@
 #' Use [simulate_polarssql()] with [dbplyr::tbl_lazy()] or
 #' [dbplyr::lazy_frame()] to see simulated SQL without
 #' converting to live access.
+#' [tbl_polarssql()] is same as [dbplyr::tbl_memdb()], but the backend is
+#' Polars instead of SQLite.
 #' @name dbplyr-backend-polarssql
 #' @aliases NULL
 #' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
-#' con <- DBI::dbConnect(polarssql())
-#' DBI::dbWriteTable(con, "mtcars", mtcars)
-#'
-#' tbl(con, "mtcars") |>
-#'   filter(cyl == 4) |>
-#'   arrange(desc(mpg)) |>
-#'   head(n = 3) |>
-#'   collect()
 #'
 #' dbplyr::tbl_lazy(mtcars, simulate_polarssql(), name = "mtcars") |>
 #'   filter(cyl == 4) |>
 #'   arrange(desc(mpg)) |>
 #'   head(n = 3)
 #'
+#' tbl_polarssql(mtcars) |>
+#'   filter(cyl == 4) |>
+#'   arrange(desc(mpg)) |>
+#'   head(n = 3) |>
+#'   collect()
+#'
 #' # Unlike other dbplyr backends, `compute` has a special behavior.
 #' # It returns a polars DataFrame or LazyFrame.
-#' tbl(con, "mtcars") |>
+#' tbl_polarssql(mtcars) |>
 #'   filter(cyl == 4) |>
 #'   arrange(desc(mpg)) |>
 #'   head(n = 3) |>
@@ -31,23 +31,41 @@
 NULL
 
 
-#' @param ... Any parameters to be forwarded
 #' @rdname dbplyr-backend-polarssql
 #' @export
-simulate_polarssql <- function(...) {
-  structure(list(), ..., class = c("polarssql_connection", "TestConnection", "DBIConnection"))
+simulate_polarssql <- function() {
+  if (!is_installed("dbplyr")) {
+    abort("dbplyr is not installed")
+  }
+
+  dbplyr::simulate_dbi("polarssql_connection")
 }
 
 
-#' @export
+# exported in zzz.R
 dbplyr_edition.polarssql_connection <- function(con) 2L
+
+
+#' @rdname dbplyr-backend-polarssql
+#' @inheritParams dbplyr::tbl_memdb
+#' @export
+tbl_polarssql <- function(df, name = deparse(substitute(df))) {
+  if (!is_installed("dbplyr")) {
+    abort("dbplyr is not installed")
+  }
+
+  con <- polarssql_connection()
+  dbWriteTable(con, name, df, overwrite = TRUE)
+
+  dplyr::tbl(con, name)
+}
 
 
 #' @rdname dbplyr-backend-polarssql
 #' @inheritParams dbplyr::collapse.tbl_sql
 #' @param eager if `TRUE` (default), return a polars DataFrame,
 #' otherwise return a polars LazyFrame.
-#' @export
+# exported in zzz.R
 compute.tbl_polarssql_connection <- function(
     x,
     eager = TRUE) {

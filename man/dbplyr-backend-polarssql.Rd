@@ -2,15 +2,21 @@
 % Please edit documentation in R/pkg-dbplyr.R
 \name{dbplyr-backend-polarssql}
 \alias{simulate_polarssql}
+\alias{tbl_polarssql}
 \alias{compute.tbl_polarssql_connection}
 \title{polarssql backend for dbplyr}
 \usage{
-simulate_polarssql(...)
+simulate_polarssql()
+
+tbl_polarssql(df, name = deparse(substitute(df)))
 
 \method{compute}{tbl_polarssql_connection}(x, eager = TRUE)
 }
 \arguments{
-\item{...}{Any parameters to be forwarded}
+\item{df}{Data frame to copy}
+
+\item{name}{Name of table in database: defaults to a random name that's
+unlikely to conflict with an existing table.}
 
 \item{x}{A lazy data frame backed by a database query.}
 
@@ -21,27 +27,27 @@ otherwise return a polars LazyFrame.}
 Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbplyr:tbl_lazy]{dbplyr::tbl_lazy()}} or
 \code{\link[dbplyr:tbl_lazy]{dbplyr::lazy_frame()}} to see simulated SQL without
 converting to live access.
+\code{\link[=tbl_polarssql]{tbl_polarssql()}} is same as \code{\link[dbplyr:memdb_frame]{dbplyr::tbl_memdb()}}, but the backend is
+Polars instead of SQLite.
 }
 \examples{
 \dontshow{if (polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(dplyr, warn.conflicts = FALSE)
-con <- DBI::dbConnect(polarssql())
-DBI::dbWriteTable(con, "mtcars", mtcars)
-
-tbl(con, "mtcars") |>
-  filter(cyl == 4) |>
-  arrange(desc(mpg)) |>
-  head(n = 3) |>
-  collect()
 
 dbplyr::tbl_lazy(mtcars, simulate_polarssql(), name = "mtcars") |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
   head(n = 3)
 
+tbl_polarssql(mtcars) |>
+  filter(cyl == 4) |>
+  arrange(desc(mpg)) |>
+  head(n = 3) |>
+  collect()
+
 # Unlike other dbplyr backends, `compute` has a special behavior.
 # It returns a polars DataFrame or LazyFrame.
-tbl(con, "mtcars") |>
+tbl_polarssql(mtcars) |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
   head(n = 3) |>

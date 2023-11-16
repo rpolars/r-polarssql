@@ -6,6 +6,6 @@
 #' @import DBI
 #' @import methods
 #' @importFrom polars pl
-#' @importFrom rlang exec list2 syms := !!!
+#' @importFrom rlang abort exec is_installed list2 syms := !!!
 ## usethis namespace: end
 NULL
