@@ -3,6 +3,10 @@ version: "3"
 env:
   NOT_CRAN: "true"
 
+vars:
+  R_SOURCE: R/*
+  VIGNETTES: vignettes/**/*.Rmd
+
 tasks:
   setup-dev:
     desc: Install tools for development.
@@ -21,3 +25,36 @@ tasks:
           rpolars = "https://rpolars.r-universe.dev"
         );
         pak::local_install_deps(dependencies = c("all", "Config/Needs/dev", "Config/Needs/website"))'
+
+  build-all:
+    desc: Build the R package, generate documents, run all tests, and update files.
+    deps:
+      - build-documents
+    cmds:
+      - task: build-readme
+
+  build-documents:
+    desc: Build the R package and generate documents.
+    internal: true
+    sources:
+      - "{{.R_SOURCE}}"
+    generates:
+      - NAMESPACE
+      - man/*.Rd
+    status:
+      - Rscript -e 'if (desc::desc_get("RoxygenNote") < packageVersion("roxygen2")) quit(status = 1)'
+    cmds:
+      - Rscript -e 'library(dplyr); library(dbplyr); devtools::document()'
+
+  build-readme:
+    internal: true
+    desc: Build README.md
+    sources:
+      - README.Rmd
+      - "{{.R_SOURCE}}"
+    generates:
+      - README.md
+    cmds:
+      - Rscript -e
+        'devtools::load_all();
+        rmarkdown::render(input = "README.Rmd", output_file = "README.md")'
