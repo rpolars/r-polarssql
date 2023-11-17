@@ -46,18 +46,45 @@ simulate_polarssql <- function() {
 dbplyr_edition.polarssql_connection <- function(con) 2L
 
 
+# copied from the dbplyr package
+# https://github.com/tidyverse/dbplyr/blob/388a6eef0e634efa693d809061ceac91d3b69a77/R/data-cache.R#L1-L6
+cache <- function() {
+  if (!is_attached("polarssql_cache")) {
+    get("attach")(new_environment(), name = "polarssql_cache", pos = length(search()) - 1)
+  }
+  search_env("polarssql_cache")
+}
+
+
+# copied from the dbplyr package
+# https://github.com/tidyverse/dbplyr/blob/388a6eef0e634efa693d809061ceac91d3b69a77/R/data-cache.R#L8-L18
+cache_computation <- function(name, computation) {
+  cache <- cache()
+
+  if (env_has(cache, name)) {
+    env_get(cache, name)
+  } else {
+    res <- force(computation)
+    env_poke(cache, name, res)
+    res
+  }
+}
+
+
 #' @rdname dbplyr-backend-polarssql
 #' @inheritParams dbplyr::tbl_memdb
 #' @export
 tbl_polarssql <- function(df, name = deparse(substitute(df))) {
   if (!is_installed("dbplyr")) {
-    abort("dbplyr is not installed")
+    abort("`polarssql::tbl_polarssql` requires the dbplyr package to be installed")
   }
 
-  con <- polarssql_connection()
+  con <- polarssql_default_connection()
   dbWriteTable(con, name, df, overwrite = TRUE)
 
-  dplyr::tbl(con, name)
+  cache_computation("tbl_polarssql", {
+    dplyr::tbl(con, name)
+  })
 }
 
 
