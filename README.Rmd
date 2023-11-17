@@ -95,10 +95,11 @@ And, basic supports for `{dbplyr}` is also implemented.
 ```{r}
 library(dplyr, warn.conflicts = FALSE)
 
-# Resgister a data.frame to the built-in connection, and query it via dbplyr
-tbl_polarssql(mtcars) |>
-  filter(cyl == 4) |>
-  arrange(desc(mpg)) |>
-  head(3) |>
+# Resgister Data Frames to the built-in connection
+band_db <- tbl_polarssql(dplyr::band_members)
+instrument_db <- tbl_polarssql(dplyr::band_instruments)
+
+band_db |>
+  left_join(instrument_db) |>
   compute()
 ```

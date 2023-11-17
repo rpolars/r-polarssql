@@ -113,3 +113,44 @@ compute.tbl_polarssql_connection <- function(
 
   polarssql_query(sql, con, result_type = result_type)
 }
+
+
+# exported in zzz.R
+sql_query_join.polarssql_connection <- function(con,
+                                                x,
+                                                y,
+                                                select,
+                                                type = "inner",
+                                                by = NULL,
+                                                na_matches = FALSE,
+                                                ...,
+                                                lvl = 0) {
+  JOIN <- switch(type,
+    left = dbplyr::sql("LEFT JOIN"),
+    inner = dbplyr::sql("INNER JOIN"),
+    right = dbplyr::sql("RIGHT JOIN"),
+    full = dbplyr::sql("FULL JOIN"),
+    cross = dbplyr::sql("CROSS JOIN"),
+    cli::cli_abort("Unknown join type: {.val {type}}")
+  )
+
+  x <- dplyr::sql_subquery(con, x, name = by$x_as, lvl = lvl)
+  y <- dplyr::sql_subquery(con, y, name = by$y_as, lvl = lvl)
+
+  sql_join_tbls <- utils::getFromNamespace("sql_join_tbls", "dbplyr")
+  sql_clause_select <- utils::getFromNamespace("sql_clause_select", "dbplyr")
+  sql_clause_from <- utils::getFromNamespace("sql_clause_from", "dbplyr")
+  sql_clause <- utils::getFromNamespace("sql_clause", "dbplyr")
+  sql_format_clauses <- utils::getFromNamespace("sql_format_clauses", "dbplyr")
+
+  on <- sql_join_tbls(con, by, na_matches = na_matches)
+
+  clauses <- list(
+    sql_clause_select(con, select),
+    sql_clause_from(x),
+    sql_clause(JOIN, y),
+    sql_clause("ON", on, sep = " AND", parens = FALSE, lvl = 1)
+  )
+
+  sql_format_clauses(clauses, lvl, con)
+}
