@@ -4,6 +4,7 @@
 \alias{simulate_polarssql}
 \alias{tbl_polarssql}
 \alias{compute.tbl_polarssql_connection}
+\alias{print.tbl_polarssql_connection}
 \title{polarssql backend for dbplyr}
 \usage{
 simulate_polarssql()
@@ -11,6 +12,8 @@ simulate_polarssql()
 tbl_polarssql(df, name = deparse(substitute(df)))
 
 \method{compute}{tbl_polarssql_connection}(x, ..., eager = TRUE, cte = TRUE)
+
+\method{print}{tbl_polarssql_connection}(x, ...)
 }
 \arguments{
 \item{df}{Data frame to copy}
@@ -39,22 +42,26 @@ Polars instead of SQLite.
 \dontshow{if (polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(dplyr, warn.conflicts = FALSE)
 
+# Test connection shows the SQL query.
 dbplyr::tbl_lazy(mtcars, simulate_polarssql(), name = "mtcars") |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
+  select(contains("c")) |>
   head(n = 3)
 
+# Actual polarssql connection shows the Polars naive plan.
 tbl_polarssql(mtcars) |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
-  head(n = 3) |>
-  collect()
+  select(contains("c")) |>
+  head(n = 3)
 
 # Unlike other dbplyr backends, `compute` has a special behavior.
 # It returns a polars DataFrame or LazyFrame.
 tbl_polarssql(mtcars) |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
+  select(contains("c")) |>
   head(n = 3) |>
   compute()
 \dontshow{\}) # examplesIf}

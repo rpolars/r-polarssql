@@ -10,22 +10,26 @@
 #' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
 #'
+#' # Test connection shows the SQL query.
 #' dbplyr::tbl_lazy(mtcars, simulate_polarssql(), name = "mtcars") |>
 #'   filter(cyl == 4) |>
 #'   arrange(desc(mpg)) |>
+#'   select(contains("c")) |>
 #'   head(n = 3)
 #'
+#' # Actual polarssql connection shows the Polars naive plan.
 #' tbl_polarssql(mtcars) |>
 #'   filter(cyl == 4) |>
 #'   arrange(desc(mpg)) |>
-#'   head(n = 3) |>
-#'   collect()
+#'   select(contains("c")) |>
+#'   head(n = 3)
 #'
 #' # Unlike other dbplyr backends, `compute` has a special behavior.
 #' # It returns a polars DataFrame or LazyFrame.
 #' tbl_polarssql(mtcars) |>
 #'   filter(cyl == 4) |>
 #'   arrange(desc(mpg)) |>
+#'   select(contains("c")) |>
 #'   head(n = 3) |>
 #'   compute()
 NULL
@@ -112,4 +116,16 @@ compute.tbl_polarssql_connection <- function(
   }
 
   polarssql_query(sql, con, result_type = result_type)
+}
+
+#' @rdname dbplyr-backend-polarssql
+#' @inheritParams compute.tbl_polarssql_connection
+# exported in zzz.R
+print.tbl_polarssql_connection <- function(x, ...) {
+  if (inherits(x$src$con, "TestConnection")) {
+    NextMethod("print")
+  } else {
+    print(compute.tbl_polarssql_connection(x, eager = FALSE))
+    invisible(x)
+  }
 }
