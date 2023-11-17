@@ -10,7 +10,7 @@ simulate_polarssql()
 
 tbl_polarssql(df, name = deparse(substitute(df)))
 
-\method{compute}{tbl_polarssql_connection}(x, eager = TRUE)
+\method{compute}{tbl_polarssql_connection}(x, ..., eager = TRUE, cte = TRUE)
 }
 \arguments{
 \item{df}{Data frame to copy}
@@ -20,8 +20,13 @@ unlikely to conflict with an existing table.}
 
 \item{x}{A lazy data frame backed by a database query.}
 
+\item{...}{Ignored.}
+
 \item{eager}{if \code{TRUE} (default), return a polars DataFrame,
 otherwise return a polars LazyFrame.}
+
+\item{cte}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+Use common table expressions in the generated SQL?}
 }
 \description{
 Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbplyr:tbl_lazy]{dbplyr::tbl_lazy()}} or

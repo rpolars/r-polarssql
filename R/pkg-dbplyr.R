@@ -62,18 +62,21 @@ tbl_polarssql <- function(df, name = deparse(substitute(df))) {
 
 
 #' @rdname dbplyr-backend-polarssql
-#' @inheritParams dbplyr::collapse.tbl_sql
+#' @inheritParams dbplyr::compute.tbl_sql
+#' @param ... Ignored.
 #' @param eager if `TRUE` (default), return a polars DataFrame,
 #' otherwise return a polars LazyFrame.
 # exported in zzz.R
 compute.tbl_polarssql_connection <- function(
     x,
-    eager = TRUE) {
+    ...,
+    eager = TRUE,
+    cte = TRUE) {
   con <- x$src$con
 
   vars <- dbplyr::op_vars(x)
   x_aliased <- dplyr::select(x, !!!syms(vars))
-  sql <- dbplyr::db_sql_render(con, x_aliased$lazy_query, cte = TRUE)
+  sql <- dbplyr::db_sql_render(con, x_aliased$lazy_query, cte = cte)
 
   if (eager) {
     result_type <- "polars_df"
