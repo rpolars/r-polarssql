@@ -3,6 +3,7 @@
 #' @param result_type The type of result to return.
 #' `nanoarrow_array_stream` requires [the nanoarrow package][nanoarrow::nanoarrow-package].
 #' @param sql A SQL string.
+#' @param ... Other arguments passed to [as_polars_df()]. Ignored if `result_type` is `"polars_lf"`.
 #' @inheritParams polarssql_register
 #' @return One of the following depending on `result_type`:
 #' - [polars LazyFrame][polars::LazyFrame_class] (when `result_type = "polars_lf"`, default)
@@ -34,6 +35,7 @@
 polarssql_query <- function(
     sql,
     conn = polarssql_default_connection(),
+    ...,
     result_type = c("polars_lf", "polars_df", "data_frame", "nanoarrow_array_stream")) {
   stopifnot(dbIsValid(conn))
 
@@ -47,9 +49,10 @@ polarssql_query <- function(
 
   switch(result_type,
     "polars_lf" = lf,
-    "polars_df" = lf$collect(),
-    "data_frame" = lf |> as.data.frame(),
-    "nanoarrow_array_stream" = lf$collect() |>
+    "polars_df" = lf |> as_polars_df(...),
+    "data_frame" = lf |> as_polars_df(...) |> as.data.frame(),
+    "nanoarrow_array_stream" = lf |>
+      as_polars_df(...) |>
       nanoarrow::as_nanoarrow_array_stream()
   )
 }

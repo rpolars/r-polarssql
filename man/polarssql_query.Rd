@@ -7,6 +7,7 @@
 polarssql_query(
   sql,
   conn = polarssql_default_connection(),
+  ...,
   result_type = c("polars_lf", "polars_df", "data_frame", "nanoarrow_array_stream")
 )
 }
@@ -15,6 +16,8 @@ polarssql_query(
 
 \item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}.
 Use the default built-in connection by default.}
+
+\item{...}{Other arguments passed to \code{\link[=as_polars_df]{as_polars_df()}}. Ignored if \code{result_type} is \code{"polars_lf"}.}
 
 \item{result_type}{The type of result to return.
 \code{nanoarrow_array_stream} requires \link[nanoarrow:nanoarrow-package]{the nanoarrow package}.}

@@ -92,33 +92,59 @@ tbl_polarssql <- function(df, name = deparse(substitute(df))) {
 }
 
 
-#' @rdname dbplyr-backend-polarssql
+#' Compute results of a query
+#'
+#' @rdname compute.tbl_polarssql_connection
+#' @param x A [tbl_polarssql_connection][dbplyr-backend-polarssql] object.
+#' @param ... Other arguments passed to [`as_polars_df(<LazyFrame>)`][as_polars_df].
 #' @inheritParams dbplyr::compute.tbl_sql
-#' @param ... Ignored.
-#' @param eager if `TRUE` (default), return a polars DataFrame,
-#' otherwise return a polars LazyFrame.
-# exported in zzz.R
-compute.tbl_polarssql_connection <- function(
-    x,
-    ...,
-    eager = TRUE,
-    cte = TRUE) {
+#' @seealso [dbplyr-backend-polarssql]
+#' @export
+#' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
+#' library(dplyr, warn.conflicts = FALSE)
+#'
+#' t <- tbl_polarssql(mtcars) |>
+#'   filter(cyl == 4)
+#'
+#' as_polars_lf(t)
+#'
+#' as_polars_df(t,  n_rows = 1)
+#'
+#' compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
+as_polars_lf.tbl_polarssql_connection <- function(x, ..., cte = TRUE) {
   con <- x$src$con
 
   vars <- dbplyr::op_vars(x)
   x_aliased <- dplyr::select(x, !!!syms(vars))
   sql <- dbplyr::db_sql_render(con, x_aliased$lazy_query, cte = cte)
 
-  if (eager) {
-    result_type <- "polars_df"
-  } else {
-    result_type <- "polars_lf"
-  }
+  con@env$context$execute(sql)
+}
 
-  polarssql_query(sql, con, result_type = result_type)
+
+#' @rdname compute.tbl_polarssql_connection
+#' @inheritParams as_polars_lf.tbl_polarssql_connection
+#' @export
+as_polars_df.tbl_polarssql_connection <- function(x, ..., cte = TRUE) {
+  as_polars_lf(x, cte = cte) |>
+    as_polars_df(...)
+}
+
+
+#' @rdname compute.tbl_polarssql_connection
+#' @inheritParams as_polars_lf.tbl_polarssql_connection
+#' @inheritParams dbplyr::compute.tbl_sql
+# exported in zzz.R
+compute.tbl_polarssql_connection <- function(
+    x,
+    ...,
+    n = Inf,
+    cte = TRUE) {
+  as_polars_df(x, n_rows = n, cte = cte, ...)
 }
 
 #' @rdname dbplyr-backend-polarssql
+#' @param ... Ignored.
 #' @inheritParams compute.tbl_polarssql_connection
 # exported in zzz.R
 print.tbl_polarssql_connection <- function(x, ...) {

@@ -3,15 +3,12 @@
 \name{dbplyr-backend-polarssql}
 \alias{simulate_polarssql}
 \alias{tbl_polarssql}
-\alias{compute.tbl_polarssql_connection}
 \alias{print.tbl_polarssql_connection}
 \title{polarssql backend for dbplyr}
 \usage{
 simulate_polarssql()
 
 tbl_polarssql(df, name = deparse(substitute(df)))
-
-\method{compute}{tbl_polarssql_connection}(x, ..., eager = TRUE, cte = TRUE)
 
 \method{print}{tbl_polarssql_connection}(x, ...)
 }
@@ -21,15 +18,9 @@ tbl_polarssql(df, name = deparse(substitute(df)))
 \item{name}{Name of table in database: defaults to a random name that's
 unlikely to conflict with an existing table.}
 
-\item{x}{A lazy data frame backed by a database query.}
+\item{x}{A \link[=dbplyr-backend-polarssql]{tbl_polarssql_connection} object.}
 
 \item{...}{Ignored.}
-
-\item{eager}{if \code{TRUE} (default), return a polars DataFrame,
-otherwise return a polars LazyFrame.}
-
-\item{cte}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-Use common table expressions in the generated SQL?}
 }
 \description{
 Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbplyr:tbl_lazy]{dbplyr::tbl_lazy()}} or
