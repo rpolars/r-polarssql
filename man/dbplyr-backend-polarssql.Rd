@@ -40,7 +40,7 @@ dbplyr::tbl_lazy(mtcars, simulate_polarssql(), name = "mtcars") |>
   select(contains("c")) |>
   head(n = 3)
 
-# Actual polarssql connection shows the Polars naive plan.
+# Actual polarssql connection shows the Polars naive plan (LazyFrame).
 tbl_polarssql(mtcars) |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
@@ -48,7 +48,7 @@ tbl_polarssql(mtcars) |>
   head(n = 3)
 
 # Unlike other dbplyr backends, `compute` has a special behavior.
-# It returns a polars DataFrame or LazyFrame.
+# It returns a polars DataFrame.
 tbl_polarssql(mtcars) |>
   filter(cyl == 4) |>
   arrange(desc(mpg)) |>
