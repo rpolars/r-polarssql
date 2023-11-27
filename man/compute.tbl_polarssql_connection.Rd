@@ -28,6 +28,7 @@ Compute results of a query
 \examples{
 \dontshow{if (polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(dplyr, warn.conflicts = FALSE)
+library(polars)
 
 t <- tbl_polarssql(mtcars) |>
   filter(cyl == 4)

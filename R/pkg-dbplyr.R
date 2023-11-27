@@ -102,6 +102,7 @@ tbl_polarssql <- function(df, name = deparse(substitute(df))) {
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
+#' library(polars)
 #'
 #' t <- tbl_polarssql(mtcars) |>
 #'   filter(cyl == 4)
