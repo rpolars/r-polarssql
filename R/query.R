@@ -1,15 +1,8 @@
 #' Execute SQL query
 #'
-#' @param result_type The type of result to return.
-#' `nanoarrow_array_stream` requires [the nanoarrow package][nanoarrow::nanoarrow-package].
 #' @param sql A SQL string.
-#' @param ... Other arguments passed to [as_polars_df()]. Ignored if `result_type` is `"polars_lf"`.
 #' @inheritParams polarssql_register
-#' @return One of the following depending on `result_type`:
-#' - [polars LazyFrame][polars::LazyFrame_class] (when `result_type = "polars_lf"`, default)
-#' - [polars DataFrame][polars::DataFrame_class] (when `result_type = "polars_df"`)
-#' - [data.frame] (when `result_type = "data_frame"`)
-#' - [nanoarrow_array_stream][nanoarrow::as_nanoarrow_array_stream()]
+#' @return [polars LazyFrame][polars::LazyFrame_class]
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql
 #' polarssql_register(mtcars = mtcars)
@@ -19,40 +12,12 @@
 #' # Returns a polars LazyFrame
 #' polarssql_query(query)
 #'
-#' # Returns a data.frame
-#' polarssql_query(query, result_type = "data_frame")
-#'
-#' # Returns a polars DataFrame
-#' polarssql_query(query, result_type = "polars_df")
-#'
-#' # Returns a nanoarrow_array_stream
-#' if (requireNamespace("nanoarrow", quietly = TRUE)) {
-#'   polarssql_query(query, result_type = "nanoarrow_array_stream")
-#' }
-#'
 #' # Clean up
 #' polarssql_unregister("mtcars")
 polarssql_query <- function(
     sql,
-    conn = polarssql_default_connection(),
-    ...,
-    result_type = c("polars_lf", "polars_df", "data_frame", "nanoarrow_array_stream")) {
+    conn = polarssql_default_connection()) {
   stopifnot(dbIsValid(conn))
 
-  result_type <- match.arg(result_type)
-
-  if (result_type == "nanoarrow_array_stream" && !requireNamespace("nanoarrow", quietly = TRUE)) {
-    stop("Please install the `nanoarrow` package to convert to `nanoarrow_array_stream`.")
-  }
-
-  lf <- conn@env$context$execute(sql, eager = FALSE)
-
-  switch(result_type,
-    "polars_lf" = lf,
-    "polars_df" = lf |> as_polars_df(...),
-    "data_frame" = lf |> as_polars_df(...) |> as.data.frame(),
-    "nanoarrow_array_stream" = lf |>
-      as_polars_df(...) |>
-      nanoarrow::as_nanoarrow_array_stream()
-  )
+  conn@env$context$execute(sql, eager = FALSE)
 }

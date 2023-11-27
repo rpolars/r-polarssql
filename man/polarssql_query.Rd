@@ -4,32 +4,16 @@
 \alias{polarssql_query}
 \title{Execute SQL query}
 \usage{
-polarssql_query(
-  sql,
-  conn = polarssql_default_connection(),
-  ...,
-  result_type = c("polars_lf", "polars_df", "data_frame", "nanoarrow_array_stream")
-)
+polarssql_query(sql, conn = polarssql_default_connection())
 }
 \arguments{
 \item{sql}{A SQL string.}
 
 \item{conn}{A polarssql connection, created by \code{\link[=polarssql]{polarssql()}}.
 Use the default built-in connection by default.}
-
-\item{...}{Other arguments passed to \code{\link[=as_polars_df]{as_polars_df()}}. Ignored if \code{result_type} is \code{"polars_lf"}.}
-
-\item{result_type}{The type of result to return.
-\code{nanoarrow_array_stream} requires \link[nanoarrow:nanoarrow-package]{the nanoarrow package}.}
 }
 \value{
-One of the following depending on \code{result_type}:
-\itemize{
-\item \link[polars:LazyFrame_class]{polars LazyFrame} (when \code{result_type = "polars_lf"}, default)
-\item \link[polars:DataFrame_class]{polars DataFrame} (when \code{result_type = "polars_df"})
-\item \link{data.frame} (when \code{result_type = "data_frame"})
-\item \link[nanoarrow:as_nanoarrow_array_stream]{nanoarrow_array_stream}
-}
+\link[polars:LazyFrame_class]{polars LazyFrame}
 }
 \description{
 Execute SQL query
@@ -42,17 +26,6 @@ query <- "SELECT * FROM mtcars LIMIT 5"
 
 # Returns a polars LazyFrame
 polarssql_query(query)
-
-# Returns a data.frame
-polarssql_query(query, result_type = "data_frame")
-
-# Returns a polars DataFrame
-polarssql_query(query, result_type = "polars_df")
-
-# Returns a nanoarrow_array_stream
-if (requireNamespace("nanoarrow", quietly = TRUE)) {
-  polarssql_query(query, result_type = "nanoarrow_array_stream")
-}
 
 # Clean up
 polarssql_unregister("mtcars")

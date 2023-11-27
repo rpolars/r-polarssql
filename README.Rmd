@@ -83,8 +83,8 @@ library(polarssql)
 # Resgister a data.frame to the built-in connection
 polarssql_register(df = mtcars)
 
-# Get the query result as a polars DataFrame
-polarssql_query("SELECT * FROM df WHERE cyl = 4", result_type = "polars_df")
+# Get the query result as a polars LazyFrame
+polarssql_query("SELECT * FROM df WHERE cyl = 4")
 
 # Unregister the table
 polarssql_unregister("df")

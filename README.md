@@ -92,24 +92,13 @@ library(polarssql)
 # Resgister a data.frame to the built-in connection
 polarssql_register(df = mtcars)
 
-# Get the query result as a polars DataFrame
-polarssql_query("SELECT * FROM df WHERE cyl = 4", result_type = "polars_df")
-#> shape: (11, 11)
-#> ┌──────┬─────┬───────┬───────┬───┬─────┬─────┬──────┬──────┐
-#> │ mpg  ┆ cyl ┆ disp  ┆ hp    ┆ … ┆ vs  ┆ am  ┆ gear ┆ carb │
-#> │ ---  ┆ --- ┆ ---   ┆ ---   ┆   ┆ --- ┆ --- ┆ ---  ┆ ---  │
-#> │ f64  ┆ f64 ┆ f64   ┆ f64   ┆   ┆ f64 ┆ f64 ┆ f64  ┆ f64  │
-#> ╞══════╪═════╪═══════╪═══════╪═══╪═════╪═════╪══════╪══════╡
-#> │ 22.8 ┆ 4.0 ┆ 108.0 ┆ 93.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
-#> │ 24.4 ┆ 4.0 ┆ 146.7 ┆ 62.0  ┆ … ┆ 1.0 ┆ 0.0 ┆ 4.0  ┆ 2.0  │
-#> │ 22.8 ┆ 4.0 ┆ 140.8 ┆ 95.0  ┆ … ┆ 1.0 ┆ 0.0 ┆ 4.0  ┆ 2.0  │
-#> │ 32.4 ┆ 4.0 ┆ 78.7  ┆ 66.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
-#> │ …    ┆ …   ┆ …     ┆ …     ┆ … ┆ …   ┆ …   ┆ …    ┆ …    │
-#> │ 27.3 ┆ 4.0 ┆ 79.0  ┆ 66.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
-#> │ 26.0 ┆ 4.0 ┆ 120.3 ┆ 91.0  ┆ … ┆ 0.0 ┆ 1.0 ┆ 5.0  ┆ 2.0  │
-#> │ 30.4 ┆ 4.0 ┆ 95.1  ┆ 113.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 5.0  ┆ 2.0  │
-#> │ 21.4 ┆ 4.0 ┆ 121.0 ┆ 109.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 2.0  │
-#> └──────┴─────┴───────┴───────┴───┴─────┴─────┴──────┴──────┘
+# Get the query result as a polars LazyFrame
+polarssql_query("SELECT * FROM df WHERE cyl = 4")
+#> [1] "polars LazyFrame naive plan: (run ldf$describe_optimized_plan() to see the optimized plan)"
+#>  SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM
+#>   FILTER [(col("cyl")) == (4)] FROM
+#> 
+#>   DF ["mpg", "cyl", "disp", "hp"]; PROJECT */11 COLUMNS; SELECTION: "None"
 
 # Unregister the table
 polarssql_unregister("df")
