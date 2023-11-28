@@ -35,11 +35,11 @@ t <- tbl_polarssql(mtcars) |>
 
 as_polars_lf(t)
 
-as_polars_df(t,  n_rows = 1)
+as_polars_df(t, n_rows = 1)
 
 compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
 
 # Clean up
-polarssql_unregister("mtcars")
+DBI::dbDisconnect(polarssql_default_connection())
 \dontshow{\}) # examplesIf}
 }

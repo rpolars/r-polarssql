@@ -7,6 +7,9 @@ builtin_connection <- new.env(parent = emptyenv())
 #' @return A polarssql connection object
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql
+#' # Clean up
+#' DBI::dbDisconnect(polarssql_default_connection())
+#'
 #' polarssql_default_connection()
 #'
 #' # Register a Table

@@ -8,7 +8,7 @@
 \usage{
 simulate_polarssql()
 
-tbl_polarssql(df, name = deparse(substitute(df)))
+tbl_polarssql(df, name = deparse(substitute(df)), ..., overwrite = FALSE)
 
 \method{print}{tbl_polarssql_connection}(x, ...)
 }
@@ -18,16 +18,17 @@ tbl_polarssql(df, name = deparse(substitute(df)))
 \item{name}{Name of table in database: defaults to a random name that's
 unlikely to conflict with an existing table.}
 
-\item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
-
 \item{...}{Ignored.}
+
+\item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 }
 \description{
 Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbplyr:tbl_lazy]{dbplyr::tbl_lazy()}} or
 \code{\link[dbplyr:tbl_lazy]{dbplyr::lazy_frame()}} to see simulated SQL without
 converting to live access.
-\code{\link[=tbl_polarssql]{tbl_polarssql()}} is same as \code{\link[dbplyr:memdb_frame]{dbplyr::tbl_memdb()}}, but the backend is
+\code{\link[=tbl_polarssql]{tbl_polarssql()}} is similar to \code{\link[dbplyr:memdb_frame]{dbplyr::tbl_memdb()}}, but the backend is
 Polars instead of SQLite.
+It uses \code{\link[=polarssql_default_connection]{polarssql_default_connection()}} as the DBI connection.
 }
 \examples{
 \dontshow{if (polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

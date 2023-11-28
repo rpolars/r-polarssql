@@ -14,6 +14,9 @@ Get the default built-in connection.
 }
 \examples{
 \dontshow{if (polars::pl$polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Clean up
+DBI::dbDisconnect(polarssql_default_connection())
+
 polarssql_default_connection()
 
 # Register a Table

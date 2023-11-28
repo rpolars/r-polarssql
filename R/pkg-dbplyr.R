@@ -3,8 +3,9 @@
 #' Use [simulate_polarssql()] with [dbplyr::tbl_lazy()] or
 #' [dbplyr::lazy_frame()] to see simulated SQL without
 #' converting to live access.
-#' [tbl_polarssql()] is same as [dbplyr::tbl_memdb()], but the backend is
+#' [tbl_polarssql()] is similar to [dbplyr::tbl_memdb()], but the backend is
 #' Polars instead of SQLite.
+#' It uses [polarssql_default_connection()] as the DBI connection.
 #' @name dbplyr-backend-polarssql
 #' @aliases NULL
 #' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
@@ -50,45 +51,22 @@ simulate_polarssql <- function() {
 dbplyr_edition.polarssql_connection <- function(con) 2L
 
 
-# copied from the dbplyr package
-# https://github.com/tidyverse/dbplyr/blob/388a6eef0e634efa693d809061ceac91d3b69a77/R/data-cache.R#L1-L6
-cache <- function() {
-  if (!is_attached("polarssql_cache")) {
-    get("attach")(new_environment(), name = "polarssql_cache", pos = length(search()) - 1)
-  }
-  search_env("polarssql_cache")
-}
-
-
-# copied from the dbplyr package
-# https://github.com/tidyverse/dbplyr/blob/388a6eef0e634efa693d809061ceac91d3b69a77/R/data-cache.R#L8-L18
-cache_computation <- function(name, computation) {
-  cache <- cache()
-
-  if (env_has(cache, name)) {
-    env_get(cache, name)
-  } else {
-    res <- force(computation)
-    env_poke(cache, name, res)
-    res
-  }
-}
-
-
 #' @rdname dbplyr-backend-polarssql
 #' @inheritParams dbplyr::tbl_memdb
+#' @param ... Ignored.
+#' @overwrite If `TRUE`, overwrite the existing table which has the same name.
+#' If not `TRUE` (default), skip writing a table if it already exists.
 #' @export
-tbl_polarssql <- function(df, name = deparse(substitute(df))) {
+tbl_polarssql <- function(df, name = deparse(substitute(df)), ..., overwrite = FALSE) {
   if (!is_installed("dbplyr")) {
     abort("`polarssql::tbl_polarssql` requires the dbplyr package to be installed")
   }
 
   con <- polarssql_default_connection()
-  dbWriteTable(con, name, df, overwrite = TRUE)
-
-  cache_computation("tbl_polarssql", {
-    dplyr::tbl(con, name)
-  })
+  if (isTRUE(overwrite) || !(name %in% dbListTables(con))) {
+    dbWriteTable(con, name, df, overwrite = TRUE)
+  }
+  dplyr::tbl(con, name)
 }
 
 
@@ -108,12 +86,12 @@ tbl_polarssql <- function(df, name = deparse(substitute(df))) {
 #'
 #' as_polars_lf(t)
 #'
-#' as_polars_df(t,  n_rows = 1)
+#' as_polars_df(t, n_rows = 1)
 #'
 #' compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
 #'
 #' # Clean up
-#' polarssql_unregister("mtcars")
+#' DBI::dbDisconnect(polarssql_default_connection())
 as_polars_lf.tbl_polarssql_connection <- function(x, ..., cte = TRUE) {
   con <- x$src$con
 
