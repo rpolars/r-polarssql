@@ -13,7 +13,7 @@
 \method{compute}{tbl_polarssql_connection}(x, ..., n = Inf, cte = TRUE)
 }
 \arguments{
-\item{x}{A \link[=dbplyr-backend-polarssql]{tbl_polarssql_connection} object.}
+\item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 
 \item{...}{Other arguments passed to \code{\link[=as_polars_df]{as_polars_df(<LazyFrame>)}}.}
 
@@ -38,8 +38,8 @@ as_polars_lf(t)
 as_polars_df(t,  n_rows = 1)
 
 compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
+
+# Clean up
+polarssql_unregister("mtcars")
 \dontshow{\}) # examplesIf}
-}
-\seealso{
-\link{dbplyr-backend-polarssql}
 }

@@ -18,7 +18,7 @@ tbl_polarssql(df, name = deparse(substitute(df)))
 \item{name}{Name of table in database: defaults to a random name that's
 unlikely to conflict with an existing table.}
 
-\item{x}{A \link[=dbplyr-backend-polarssql]{tbl_polarssql_connection} object.}
+\item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 
 \item{...}{Ignored.}
 }

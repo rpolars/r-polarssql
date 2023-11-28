@@ -95,10 +95,9 @@ tbl_polarssql <- function(df, name = deparse(substitute(df))) {
 #' Compute results of a query
 #'
 #' @rdname compute.tbl_polarssql_connection
-#' @param x A [tbl_polarssql_connection][dbplyr-backend-polarssql] object.
+#' @param x A [tbl_polarssql_connection][tbl_polarssql()] object.
 #' @param ... Other arguments passed to [`as_polars_df(<LazyFrame>)`][as_polars_df].
 #' @inheritParams dbplyr::compute.tbl_sql
-#' @seealso [dbplyr-backend-polarssql]
 #' @export
 #' @examplesIf polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
@@ -112,6 +111,9 @@ tbl_polarssql <- function(df, name = deparse(substitute(df))) {
 #' as_polars_df(t,  n_rows = 1)
 #'
 #' compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
+#'
+#' # Clean up
+#' polarssql_unregister("mtcars")
 as_polars_lf.tbl_polarssql_connection <- function(x, ..., cte = TRUE) {
   con <- x$src$con
 
