@@ -4,7 +4,7 @@
 dbIsValid_polarssql_connection <- function(dbObj, ...) {
   valid <- FALSE
 
-  if (dbObj@env$closed) {
+  if (!isFALSE(dbObj@env$closed)) {
     return(valid)
   }
 

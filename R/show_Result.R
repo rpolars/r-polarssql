@@ -3,8 +3,13 @@
 #' @usage NULL
 show_polarssql_result <- function(object) {
   cat("<polarssql_result>\n")
-  cat("  statement:    ", object@statement, "\n")
-  cat("  rows fetched: ", object@env$rows_fetched, "\n")
+
+  if (dbIsValid(object)) {
+    cat("  statement:    ", object@statement, "\n")
+    cat("  rows fetched: ", object@env$rows_fetched, "\n")
+  } else {
+    cat("  Disconnected\n")
+  }
 
   invisible(NULL)
 }
