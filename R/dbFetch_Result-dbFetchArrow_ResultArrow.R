@@ -2,6 +2,22 @@
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetch_polarssql_result <- function(res, n = -1, ...) {
+  dbFetch_polarssql_result_inner(res, n, ..., res_func = as.data.frame)
+}
+
+
+#' @rdname DBI
+#' @inheritParams DBI::dbFetchArrow
+#' @usage NULL
+dbFetchArrow_polarssql_result_arrow <- function(res, n = -1, ...) {
+  dbFetch_polarssql_result_inner(
+    res, n, ...,
+    res_func = nanoarrow::as_nanoarrow_array_stream
+  )
+}
+
+
+dbFetch_polarssql_result_inner <- function(res, n = -1, ..., res_func) {
   stopifnot(dbIsValid(res))
 
   if (length(n) != 1) {
@@ -18,7 +34,7 @@ dbFetch_polarssql_result <- function(res, n = -1, ...) {
   }
 
   out <- res@env$resultset$slice(offset = res@env$rows_fetched, length = n) |>
-    as.data.frame()
+    res_func()
 
   res@env$rows_fetched <- res@env$rows_fetched + nrow(out)
 

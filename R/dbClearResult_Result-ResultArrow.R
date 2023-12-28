@@ -13,6 +13,12 @@ dbClearResult_polarssql_result <- function(res, ...) {
   invisible(TRUE)
 }
 
+
 #' @rdname DBI
 #' @export
 setMethod("dbClearResult", "polarssql_result", dbClearResult_polarssql_result)
+
+
+#' @rdname DBI
+#' @export
+setMethod("dbClearResult", "polarssql_result_arrow", dbClearResult_polarssql_result)

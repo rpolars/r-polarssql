@@ -13,9 +13,25 @@ setClass(
   )
 )
 
-polarssql_result <- function(
+
+#' @rdname DBI
+#' @export
+setClass(
+  "polarssql_result_arrow",
+  contains = "DBIResultArrow",
+  slots = list(
+    connection = "polarssql_connection",
+    statement = "character",
+    env = "environment"
+  )
+)
+
+
+polarssql_result_inner <- function(
     connection,
-    statement) {
+    statement,
+    ...,
+    class_name) {
   stopifnot(dbIsValid(connection))
 
   env <- new.env(parent = emptyenv())
@@ -24,7 +40,7 @@ polarssql_result <- function(
 
   if (is.null(statement)) {
     return(
-      new("polarssql_result",
+      new(class_name,
         connection = connection,
         env = env
       )
@@ -35,9 +51,23 @@ polarssql_result <- function(
   env$resultset <- env$query_plan$collect() # polars DataFrame
   env$closed <- FALSE
 
-  new("polarssql_result",
+  new(class_name,
     connection = connection,
     statement = statement,
     env = env
   )
+}
+
+
+polarssql_result <- function(
+    connection,
+    statement) {
+  polarssql_result_inner(connection, statement, class_name = "polarssql_result")
+}
+
+
+polarssql_result_arrow <- function(
+    connection,
+    statement) {
+  polarssql_result_inner(connection, statement, class_name = "polarssql_result_arrow")
 }
