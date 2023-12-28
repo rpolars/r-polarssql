@@ -8,6 +8,6 @@ patrick::with_parameters_test_that(
     polarssql_unregister("mtcars")
   },
   patrick::cases(
-    pl_lf = list(expect_type = "LazyFrame")
+    pl_lf = list(expect_type = "RPolarsLazyFrame")
   )
 )

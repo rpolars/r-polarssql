@@ -70,5 +70,6 @@ tasks:
     internal: true
     sources:
       - "{{.R_SOURCE}}"
+      - DESCRIPTION
     cmds:
       - Rscript -e 'devtools::load_all(); devtools::run_examples(document = FALSE)'

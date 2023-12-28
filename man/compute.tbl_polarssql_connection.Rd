@@ -15,7 +15,7 @@
 \arguments{
 \item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 
-\item{...}{Other arguments passed to \code{\link[=as_polars_df]{as_polars_df(<LazyFrame>)}}.}
+\item{...}{Other arguments passed to \code{\link[=as_polars_df]{as_polars_df(<RPolarsLazyFrame>)}}.}
 
 \item{cte}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 Use common table expressions in the generated SQL?}
