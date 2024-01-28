@@ -13,9 +13,9 @@ RoxygenNote: 7.2.3
 Depends:
     R (>= 4.2)
 Imports:
-    DBI,
+    DBI (>= 1.2.1),
     methods,
-    polars (>= 0.12.0),
+    polars (>= 0.13.0),
     rlang
 Suggests:
     dplyr,

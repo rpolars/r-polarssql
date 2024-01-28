@@ -31,7 +31,7 @@ polarssql_result <- function(
     )
   }
 
-  env$query_plan <- connection@env$context$execute(statement, eager = FALSE)
+  env$query_plan <- connection@env$context$execute(statement)
   env$resultset <- env$query_plan$collect() # polars DataFrame
   env$closed <- FALSE
 

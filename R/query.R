@@ -4,7 +4,7 @@
 #' @inheritParams polarssql_register
 #' @return [polars LazyFrame][polars::LazyFrame_class]
 #' @export
-#' @examplesIf polars::pl$polars_info()$features$sql
+#' @examplesIf polars::polars_info()$features$sql
 #' polarssql_register(mtcars = mtcars)
 #'
 #' query <- "SELECT * FROM mtcars LIMIT 5"
@@ -19,5 +19,5 @@ polarssql_query <- function(
     conn = polarssql_default_connection()) {
   stopifnot(dbIsValid(conn))
 
-  conn@env$context$execute(sql, eager = FALSE)
+  conn@env$context$execute(sql)
 }

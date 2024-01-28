@@ -3,7 +3,7 @@
 #' @usage NULL
 show_polarssql_driver <- function(object) {
   cat("<polarssql_driver>\n")
-  show(pl$polars_info())
+  show(polars_info())
 
   invisible(NULL)
 }

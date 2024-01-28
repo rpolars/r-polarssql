@@ -136,7 +136,7 @@ table doesn't exist.}
 
 \item{statement}{a character string containing SQL.}
 
-\item{value}{a \link{data.frame} (or coercible to data.frame).}
+\item{value}{A \link{data.frame} (or coercible to data.frame).}
 
 \item{overwrite}{Allow overwriting the destination table. Cannot be
 \code{TRUE} if \code{append} is also \code{TRUE}.}

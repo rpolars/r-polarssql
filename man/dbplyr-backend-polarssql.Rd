@@ -31,7 +31,7 @@ Polars instead of SQLite.
 It uses \code{\link[=polarssql_default_connection]{polarssql_default_connection()}} as the DBI connection.
 }
 \examples{
-\dontshow{if (polars::pl$polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (polars::polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(dplyr, warn.conflicts = FALSE)
 
 # Test connection shows the SQL query.
