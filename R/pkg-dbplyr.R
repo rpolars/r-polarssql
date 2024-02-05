@@ -75,7 +75,9 @@ tbl_polarssql <- function(df, name = deparse(substitute(df)), ..., overwrite = F
 #'
 #' @rdname compute.tbl_polarssql_connection
 #' @param x A [tbl_polarssql_connection][tbl_polarssql()] object.
-#' @param ... Other arguments passed to [`as_polars_df(<RPolarsLazyFrame>)`][as_polars_df].
+#' @param ...
+#' - For [as_polars_lf]: Ignored.
+#' - For Other functions: arguments passed to [`as_polars_df(<RPolarsLazyFrame>)`][as_polars_df].
 #' @inheritParams dbplyr::compute.tbl_sql
 #' @export
 #' @examplesIf polars::polars_info()$features$sql && rlang::is_installed("dbplyr")
