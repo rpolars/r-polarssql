@@ -68,7 +68,7 @@ dbClearResult(res)
 # We can use table functions to read files directly:
 tf <- tempfile(fileext = ".parquet")
 on.exit(unlink(tf))
-polars::pl$LazyFrame(mtcars)$sink_parquet(tf)
+polars::as_polars_lf(mtcars)$sink_parquet(tf)
 
 dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC LIMIT 3"))
 ```
