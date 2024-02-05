@@ -4,20 +4,23 @@
 \alias{as_polars_lf.tbl_polarssql_connection}
 \alias{as_polars_df.tbl_polarssql_connection}
 \alias{compute.tbl_polarssql_connection}
-\title{Compute results of a query}
+\alias{as.data.frame.tbl_polarssql_connection}
+\title{Compute results of a dbplyr query}
 \usage{
 \method{as_polars_lf}{tbl_polarssql_connection}(x, ..., cte = TRUE)
 
 \method{as_polars_df}{tbl_polarssql_connection}(x, ..., cte = TRUE)
 
 \method{compute}{tbl_polarssql_connection}(x, ..., n = Inf, cte = TRUE)
+
+\method{as.data.frame}{tbl_polarssql_connection}(x, ..., cte = TRUE)
 }
 \arguments{
 \item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 
 \item{...}{\itemize{
-\item For \link{as_polars_lf}: Ignored.
-\item For Other functions: arguments passed to \code{\link[=as_polars_df]{as_polars_df(<RPolarsLazyFrame>)}}.
+\item For \code{\link{as_polars_lf(<tbl_polarssql_connection>)}}: Ignored.
+\item For Other functions: Other arguments passed to \code{\link[=as_polars_df]{as_polars_df(<RPolarsLazyFrame>)}}.
 }}
 
 \item{cte}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -26,7 +29,7 @@ Use common table expressions in the generated SQL?}
 \item{n}{Number of rows to fetch. Defaults to \code{Inf}, meaning all rows.}
 }
 \description{
-Compute results of a query
+Compute results of a dbplyr query
 }
 \examples{
 \dontshow{if (polars::polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -41,6 +44,8 @@ as_polars_lf(t)
 as_polars_df(t, n_rows = 1)
 
 compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
+
+as.data.frame(t, n_rows = 1)
 
 # Clean up
 DBI::dbDisconnect(polarssql_default_connection())

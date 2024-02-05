@@ -71,13 +71,13 @@ tbl_polarssql <- function(df, name = deparse(substitute(df)), ..., overwrite = F
 }
 
 
-#' Compute results of a query
+#' Compute results of a dbplyr query
 #'
 #' @rdname compute.tbl_polarssql_connection
 #' @param x A [tbl_polarssql_connection][tbl_polarssql()] object.
 #' @param ...
-#' - For [as_polars_lf]: Ignored.
-#' - For Other functions: arguments passed to [`as_polars_df(<RPolarsLazyFrame>)`][as_polars_df].
+#' - For [`as_polars_lf(<tbl_polarssql_connection>)`]: Ignored.
+#' - For Other functions: Other arguments passed to [`as_polars_df(<RPolarsLazyFrame>)`][as_polars_df].
 #' @inheritParams dbplyr::compute.tbl_sql
 #' @export
 #' @examplesIf polars::polars_info()$features$sql && rlang::is_installed("dbplyr")
@@ -92,6 +92,8 @@ tbl_polarssql <- function(df, name = deparse(substitute(df)), ..., overwrite = F
 #' as_polars_df(t, n_rows = 1)
 #'
 #' compute(t, n = 1) # Equivalent to `as_polars_df(t, n_rows = 1)`
+#'
+#' as.data.frame(t, n_rows = 1)
 #'
 #' # Clean up
 #' DBI::dbDisconnect(polarssql_default_connection())
@@ -126,6 +128,16 @@ compute.tbl_polarssql_connection <- function(
     cte = TRUE) {
   as_polars_df(x, n_rows = n, cte = cte, ...)
 }
+
+
+#' @rdname compute.tbl_polarssql_connection
+#' @inheritParams as_polars_df.tbl_polarssql_connection
+#' @export
+as.data.frame.tbl_polarssql_connection <- function(x, ..., cte = TRUE) {
+  as_polars_df(x, ..., cte = cte) |>
+    as.data.frame()
+}
+
 
 #' @noRd
 #' @param ... Ignored.
