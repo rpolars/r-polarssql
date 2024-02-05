@@ -41,7 +41,7 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="dbi">DBI<a class="anchor" aria-label="anchor" href="#dbi"></a></h2>
       
       
 
@@ -53,41 +53,64 @@
 
       <dl><dt>
           
-          <code><a href="DBI.html">dbClearResult(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbConnect(<i>&lt;polarssql_driver&gt;</i>)</a></code> <code><a href="DBI.html">dbDisconnect(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">dbExistsTable(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbFetch(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbGetRowsAffected(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbHasCompleted(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbIsValid(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">dbIsValid(<i>&lt;polarssql_driver&gt;</i>)</a></code> <code><a href="DBI.html">dbIsValid(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbListFields(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbListTables(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">dbQuoteIdentifier(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbQuoteString(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbRemoveTable(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbSendQuery(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbWriteTable(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="DBI.html">show(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">show(<i>&lt;polarssql_driver&gt;</i>)</a></code> <code><a href="DBI.html">show(<i>&lt;polarssql_result&gt;</i>)</a></code> 
-        </dt>
-        <dd>DBI methods</dd>
-      </dl><dl><dt>
-          
-          <code><a href="compute.tbl_polarssql_connection.html">as_polars_lf(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> <code><a href="compute.tbl_polarssql_connection.html">as_polars_df(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> <code><a href="compute.tbl_polarssql_connection.html">compute(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> 
-        </dt>
-        <dd>Compute results of a query</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dbplyr-backend-polarssql.html">simulate_polarssql()</a></code> <code><a href="dbplyr-backend-polarssql.html">tbl_polarssql()</a></code> <code><a href="dbplyr-backend-polarssql.html">print(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> 
-        </dt>
-        <dd>polarssql backend for dbplyr</dd>
-      </dl><dl><dt>
-          
           <code><a href="polarssql.html">polarssql()</a></code> 
         </dt>
         <dd>polarssql driver</dd>
       </dl><dl><dt>
+          
+          <code><a href="DBI.html">dbClearResult(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbConnect(<i>&lt;polarssql_driver&gt;</i>)</a></code> <code><a href="DBI.html">dbDisconnect(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">dbExistsTable(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbFetch(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbGetRowsAffected(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbHasCompleted(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbIsValid(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">dbIsValid(<i>&lt;polarssql_driver&gt;</i>)</a></code> <code><a href="DBI.html">dbIsValid(<i>&lt;polarssql_result&gt;</i>)</a></code> <code><a href="DBI.html">dbListFields(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbListTables(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">dbQuoteIdentifier(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbQuoteString(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbRemoveTable(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbSendQuery(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="DBI.html">dbWriteTable(<i>&lt;polarssql_connection&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="DBI.html">show(<i>&lt;polarssql_connection&gt;</i>)</a></code> <code><a href="DBI.html">show(<i>&lt;polarssql_driver&gt;</i>)</a></code> <code><a href="DBI.html">show(<i>&lt;polarssql_result&gt;</i>)</a></code> 
+        </dt>
+        <dd>DBI methods</dd>
+      </dl></div><div class="section level2">
+      <h2 id="functions-working-with-the-default-connection">Functions working with the default connection<a class="anchor" aria-label="anchor" href="#functions-working-with-the-default-connection"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="polarssql_default_connection.html">polarssql_default_connection()</a></code> 
         </dt>
         <dd>Get the default connection</dd>
       </dl><dl><dt>
           
-          <code><a href="polarssql_query.html">polarssql_query()</a></code> 
-        </dt>
-        <dd>Execute SQL query</dd>
-      </dl><dl><dt>
-          
           <code><a href="polarssql_register.html">polarssql_register()</a></code> <code><a href="polarssql_register.html">polarssql_unregister()</a></code> 
         </dt>
         <dd>Register data frames as tables</dd>
+      </dl><dl><dt>
+          
+          <code><a href="polarssql_query.html">polarssql_query()</a></code> 
+        </dt>
+        <dd>Execute SQL query</dd>
+      </dl></div><div class="section level2">
+      <h2 id="dbplyr">dbplyr<a class="anchor" aria-label="anchor" href="#dbplyr"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="dbplyr-backend-polarssql.html">simulate_polarssql()</a></code> <code><a href="dbplyr-backend-polarssql.html">tbl_polarssql()</a></code> 
+        </dt>
+        <dd>polarssql backend for dbplyr</dd>
+      </dl><dl><dt>
+          
+          <code><a href="compute.tbl_polarssql_connection.html">as_polars_lf(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> <code><a href="compute.tbl_polarssql_connection.html">as_polars_df(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> <code><a href="compute.tbl_polarssql_connection.html">compute(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> <code><a href="compute.tbl_polarssql_connection.html">as.data.frame(<i>&lt;tbl_polarssql_connection&gt;</i>)</a></code> 
+        </dt>
+        <dd>Compute results of a dbplyr query</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
