@@ -3,7 +3,6 @@
 \docType{package}
 \name{polarssql-package}
 \alias{polarssql-package}
-\alias{_PACKAGE}
 \title{polarssql: A 'polars' backend for 'DBI'.}
 \description{
 DBI-compliant interface to 'polars'.

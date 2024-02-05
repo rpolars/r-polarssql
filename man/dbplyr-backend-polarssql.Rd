@@ -20,6 +20,9 @@ unlikely to conflict with an existing table.}
 
 \item{...}{Ignored.}
 
+\item{overwrite}{If \code{TRUE}, overwrite the existing table which has the same name.
+If not \code{TRUE} (default), skip writing a table if it already exists.}
+
 \item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 }
 \description{

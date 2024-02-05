@@ -47,6 +47,7 @@ simulate_polarssql <- function() {
 }
 
 
+#' @noRd
 # exported in zzz.R
 dbplyr_edition.polarssql_connection <- function(con) 2L
 
@@ -54,7 +55,7 @@ dbplyr_edition.polarssql_connection <- function(con) 2L
 #' @rdname dbplyr-backend-polarssql
 #' @inheritParams dbplyr::tbl_memdb
 #' @param ... Ignored.
-#' @overwrite If `TRUE`, overwrite the existing table which has the same name.
+#' @param overwrite If `TRUE`, overwrite the existing table which has the same name.
 #' If not `TRUE` (default), skip writing a table if it already exists.
 #' @export
 tbl_polarssql <- function(df, name = deparse(substitute(df)), ..., overwrite = FALSE) {
@@ -127,7 +128,7 @@ compute.tbl_polarssql_connection <- function(
 #' @rdname dbplyr-backend-polarssql
 #' @param ... Ignored.
 #' @inheritParams compute.tbl_polarssql_connection
-# exported in zzz.R
+#' @exportS3Method
 print.tbl_polarssql_connection <- function(x, ...) {
   if (inherits(x$src$con, "TestConnection")) {
     NextMethod("print")
