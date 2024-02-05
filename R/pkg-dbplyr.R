@@ -125,7 +125,7 @@ compute.tbl_polarssql_connection <- function(
   as_polars_df(x, n_rows = n, cte = cte, ...)
 }
 
-#' @rdname dbplyr-backend-polarssql
+#' @noRd
 #' @param ... Ignored.
 #' @inheritParams compute.tbl_polarssql_connection
 #' @exportS3Method

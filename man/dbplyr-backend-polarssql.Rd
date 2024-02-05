@@ -3,14 +3,11 @@
 \name{dbplyr-backend-polarssql}
 \alias{simulate_polarssql}
 \alias{tbl_polarssql}
-\alias{print.tbl_polarssql_connection}
 \title{polarssql backend for dbplyr}
 \usage{
 simulate_polarssql()
 
 tbl_polarssql(df, name = deparse(substitute(df)), ..., overwrite = FALSE)
-
-\method{print}{tbl_polarssql_connection}(x, ...)
 }
 \arguments{
 \item{df}{Data frame to copy}
@@ -22,8 +19,6 @@ unlikely to conflict with an existing table.}
 
 \item{overwrite}{If \code{TRUE}, overwrite the existing table which has the same name.
 If not \code{TRUE} (default), skip writing a table if it already exists.}
-
-\item{x}{A \link[=tbl_polarssql]{tbl_polarssql_connection} object.}
 }
 \description{
 Use \code{\link[=simulate_polarssql]{simulate_polarssql()}} with \code{\link[dbplyr:tbl_lazy]{dbplyr::tbl_lazy()}} or

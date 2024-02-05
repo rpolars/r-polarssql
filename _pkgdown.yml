@@ -1,3 +1,18 @@
 url: https://rpolars.github.io/r-polarssql
 template:
   bootstrap: 5
+
+reference:
+  - title: DBI
+  - contents:
+    - polarssql
+    - DBI
+  - title: Functions working with the default connection
+  - contents:
+    - polarssql_default_connection
+    - polarssql_register
+    - polarssql_query
+  - title: dbplyr
+  - contents:
+    - dbplyr-backend-polarssql
+    - compute.tbl_polarssql_connection
