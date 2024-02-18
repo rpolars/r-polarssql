@@ -79,7 +79,10 @@ Use the default built-in connection by default.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Returns a polars LazyFrame</span></span></span>
 <span class="r-in"><span><span class="fu">polarssql_query</span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "polars LazyFrame naive plan: (run ldf$describe_optimized_plan() to see the optimized plan)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> polars LazyFrame</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $describe_optimized_plan() : Show the optimized query plan.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Naive plan:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SLICE[offset: 0, len: 5]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     DF ["mpg", "cyl", "disp", "hp"]; PROJECT */11 COLUMNS; SELECTION: "None"</span>

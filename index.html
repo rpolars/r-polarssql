@@ -134,7 +134,10 @@
 <span></span>
 <span><span class="co"># Get the query result as a polars LazyFrame</span></span>
 <span><span class="fu"><a href="reference/polarssql_query.html">polarssql_query</a></span><span class="op">(</span><span class="st">"SELECT * FROM df WHERE cyl = 4"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "polars LazyFrame naive plan: (run ldf$describe_optimized_plan() to see the optimized plan)"</span></span>
+<span><span class="co">#&gt; polars LazyFrame</span></span>
+<span><span class="co">#&gt;  $describe_optimized_plan() : Show the optimized query plan.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Naive plan:</span></span>
 <span><span class="co">#&gt;  SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM</span></span>
 <span><span class="co">#&gt;   FILTER [(col("cyl")) == (4)] FROM</span></span>
 <span><span class="co">#&gt; </span></span>

@@ -92,7 +92,10 @@ Use common table expressions in the generated SQL?</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rpolars.github.io/man/as_polars_lf.html" class="external-link">as_polars_lf</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "polars LazyFrame naive plan: (run ldf$describe_optimized_plan() to see the optimized plan)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> polars LazyFrame</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $describe_optimized_plan() : Show the optimized query plan.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Naive plan:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   FILTER [(col("cyl")) == (4.0)] FROM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
