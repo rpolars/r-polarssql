@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.8
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-03-04T00:07Z
+last_built: 2024-04-15T14:48Z
 urls:
   reference: https://rpolars.github.io/r-polarssql/reference
   article: https://rpolars.github.io/r-polarssql/articles
