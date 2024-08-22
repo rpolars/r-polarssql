@@ -1,48 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/404.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/DBI.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/compute.tbl_polarssql_connection.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/dbplyr-backend-polarssql.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/polarssql-package.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/polarssql.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/polarssql_default_connection.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/polarssql_query.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/polarssql_register.html</loc>
-  </url>
-  <url>
-    <loc>https://rpolars.github.io/r-polarssql/reference/reexports.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rpolars.github.io/r-polarssql/404.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/LICENSE-text.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/LICENSE.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/authors.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/index.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/DBI.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/compute.tbl_polarssql_connection.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/dbplyr-backend-polarssql.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/index.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/polarssql-package.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/polarssql.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/polarssql_default_connection.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/polarssql_query.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/polarssql_register.html</loc></url>
+<url><loc>https://rpolars.github.io/r-polarssql/reference/reexports.html</loc></url>
 </urlset>
+
