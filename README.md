@@ -21,8 +21,8 @@ supported SQL features.
 
 ## Installation
 
-The [`polars`](https://rpolars.github.io/) R package and `{polarssql}`
-can be installed from [R-universe](https://rpolars.r-universe.dev/):
+The `{polars0}` R package and `{polarssql}` can be installed from
+[R-universe](https://rpolars.r-universe.dev/):
 
 ``` r
 Sys.setenv(NOT_CRAN = "true") # for installing the polars package with pre-built binary
@@ -72,13 +72,13 @@ dbClearResult(res)
 # We can use table functions to read files directly:
 tf <- tempfile(fileext = ".parquet")
 on.exit(unlink(tf))
-polars::as_polars_lf(mtcars)$sink_parquet(tf)
+polars0::as_polars_lf(mtcars)$sink_parquet(tf)
 
 dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC LIMIT 3"))
-#>    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-#> 1 33.9   4 71.1  65 4.22 1.835 19.90  1  1    4    1
-#> 2 32.4   4 78.7  66 4.08 2.200 19.47  1  1    4    1
-#> 3 30.4   4 95.1 113 3.77 1.513 16.90  1  1    5    2
+#>    mpg cyl disp hp drat    wt  qsec vs am gear carb
+#> 1 33.9   4 71.1 65 4.22 1.835 19.90  1  1    4    1
+#> 2 32.4   4 78.7 66 4.08 2.200 19.47  1  1    4    1
+#> 3 30.4   4 75.7 52 4.93 1.615 18.52  1  1    4    2
 ```
 
 `{polarssql}` also provides functions that are simpler to use, inspired
@@ -95,13 +95,12 @@ polarssql_register(df = mtcars)
 # Get the query result as a polars LazyFrame
 polarssql_query("SELECT * FROM df WHERE cyl = 4")
 #> polars LazyFrame
-#>  $describe_optimized_plan() : Show the optimized query plan.
+#>  $explain(): Show the optimized query plan.
 #> 
 #> Naive plan:
 #>  SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM
-#>   FILTER [(col("cyl")) == (4)] FROM
-#> 
-#>   DF ["mpg", "cyl", "disp", "hp"]; PROJECT */11 COLUMNS; SELECTION: "None"
+#>   FILTER [(col("cyl")) == (4.0)] FROM
+#>     DF ["mpg", "cyl", "disp", "hp"]; PROJECT */11 COLUMNS; SELECTION: None
 
 # Unregister the table
 polarssql_unregister("df")
@@ -118,14 +117,17 @@ tbl_polarssql(mtcars) |>
   arrange(desc(mpg)) |>
   head(3) |>
   compute()
+#> Note: method with signature 'polarssql_connection#character' chosen for function 'dbQuoteIdentifier',
+#>  target signature 'polarssql_connection#SQL'.
+#>  "DBIConnection#SQL" would also be valid
 #> shape: (3, 11)
-#> ┌──────┬─────┬──────┬───────┬───┬─────┬─────┬──────┬──────┐
-#> │ mpg  ┆ cyl ┆ disp ┆ hp    ┆ … ┆ vs  ┆ am  ┆ gear ┆ carb │
-#> │ ---  ┆ --- ┆ ---  ┆ ---   ┆   ┆ --- ┆ --- ┆ ---  ┆ ---  │
-#> │ f64  ┆ f64 ┆ f64  ┆ f64   ┆   ┆ f64 ┆ f64 ┆ f64  ┆ f64  │
-#> ╞══════╪═════╪══════╪═══════╪═══╪═════╪═════╪══════╪══════╡
-#> │ 33.9 ┆ 4.0 ┆ 71.1 ┆ 65.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
-#> │ 32.4 ┆ 4.0 ┆ 78.7 ┆ 66.0  ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
-#> │ 30.4 ┆ 4.0 ┆ 95.1 ┆ 113.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 5.0  ┆ 2.0  │
-#> └──────┴─────┴──────┴───────┴───┴─────┴─────┴──────┴──────┘
+#> ┌──────┬─────┬──────┬──────┬───┬─────┬─────┬──────┬──────┐
+#> │ mpg  ┆ cyl ┆ disp ┆ hp   ┆ … ┆ vs  ┆ am  ┆ gear ┆ carb │
+#> │ ---  ┆ --- ┆ ---  ┆ ---  ┆   ┆ --- ┆ --- ┆ ---  ┆ ---  │
+#> │ f64  ┆ f64 ┆ f64  ┆ f64  ┆   ┆ f64 ┆ f64 ┆ f64  ┆ f64  │
+#> ╞══════╪═════╪══════╪══════╪═══╪═════╪═════╪══════╪══════╡
+#> │ 33.9 ┆ 4.0 ┆ 71.1 ┆ 65.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
+#> │ 32.4 ┆ 4.0 ┆ 78.7 ┆ 66.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 1.0  │
+#> │ 30.4 ┆ 4.0 ┆ 75.7 ┆ 52.0 ┆ … ┆ 1.0 ┆ 1.0 ┆ 4.0  ┆ 2.0  │
+#> └──────┴─────┴──────┴──────┴───┴─────┴─────┴──────┴──────┘
 ```

@@ -13,13 +13,13 @@ polarssql_query(sql, conn = polarssql_default_connection())
 Use the default built-in connection by default.}
 }
 \value{
-\link[polars:LazyFrame_class]{polars LazyFrame}
+\link[polars0:LazyFrame_class]{polars LazyFrame}
 }
 \description{
 Execute SQL query
 }
 \examples{
-\dontshow{if (polars::polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (polars0::polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 polarssql_register(mtcars = mtcars)
 
 query <- "SELECT * FROM mtcars LIMIT 5"

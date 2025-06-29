@@ -8,7 +8,7 @@
 #' It uses [polarssql_default_connection()] as the DBI connection.
 #' @name dbplyr-backend-polarssql
 #' @aliases NULL
-#' @examplesIf polars::polars_info()$features$sql && rlang::is_installed("dbplyr")
+#' @examplesIf polars0::polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
 #'
 #' # Test connection shows the SQL query.
@@ -80,9 +80,9 @@ tbl_polarssql <- function(df, name = deparse(substitute(df)), ..., overwrite = F
 #' - For Other functions: Other arguments passed to [`as_polars_df(<RPolarsLazyFrame>)`][as_polars_df].
 #' @inheritParams dbplyr::compute.tbl_sql
 #' @export
-#' @examplesIf polars::polars_info()$features$sql && rlang::is_installed("dbplyr")
+#' @examplesIf polars0::polars_info()$features$sql && rlang::is_installed("dbplyr")
 #' library(dplyr, warn.conflicts = FALSE)
-#' library(polars)
+#' library(polars0)
 #'
 #' t <- tbl_polarssql(mtcars) |>
 #'   filter(cyl == 4)
