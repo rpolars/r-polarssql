@@ -32,9 +32,9 @@ Use common table expressions in the generated SQL?}
 Compute results of a dbplyr query
 }
 \examples{
-\dontshow{if (polars::polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (polars0::polars_info()$features$sql && rlang::is_installed("dbplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(dplyr, warn.conflicts = FALSE)
-library(polars)
+library(polars0)
 
 t <- tbl_polarssql(mtcars) |>
   filter(cyl == 4)

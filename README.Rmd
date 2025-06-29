@@ -32,7 +32,7 @@ for supported SQL features.
 
 ## Installation
 
-The [`polars`](https://rpolars.github.io/) R package and `{polarssql}`
+The `{polars0}` R package and `{polarssql}`
 can be installed from [R-universe](https://rpolars.r-universe.dev/):
 
 ```r
@@ -68,7 +68,7 @@ dbClearResult(res)
 # We can use table functions to read files directly:
 tf <- tempfile(fileext = ".parquet")
 on.exit(unlink(tf))
-polars::as_polars_lf(mtcars)$sink_parquet(tf)
+polars0::as_polars_lf(mtcars)$sink_parquet(tf)
 
 dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC LIMIT 3"))
 ```

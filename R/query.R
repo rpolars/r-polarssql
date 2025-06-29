@@ -2,9 +2,9 @@
 #'
 #' @param sql A SQL string.
 #' @inheritParams polarssql_register
-#' @return [polars LazyFrame][polars::LazyFrame_class]
+#' @return [polars LazyFrame][polars0::LazyFrame_class]
 #' @export
-#' @examplesIf polars::polars_info()$features$sql
+#' @examplesIf polars0::polars_info()$features$sql
 #' polarssql_register(mtcars = mtcars)
 #'
 #' query <- "SELECT * FROM mtcars LIMIT 5"

@@ -7,7 +7,7 @@
 #' @param .overwrite Should an existing registration be overwritten?
 #' @return The polarssql connection invisibly.
 #' @export
-#' @examplesIf polars::polars_info()$features$sql
+#' @examplesIf polars0::polars_info()$features$sql
 #' con <- dbConnect(polarssql())
 #'
 #' polarssql_register(df1 = mtcars, df2 = mtcars, .conn = con)
