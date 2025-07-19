@@ -8,7 +8,7 @@ dbClearResult_polarssql_result <- function(res, ...) {
   res@env$query_plan <- pl$LazyFrame()
 
   # Release the polars DataFrame
-  .pr$DataFrame$drop_all_in_place(res@env$resultset)
+  res@env$resultset <- NULL
 
   invisible(TRUE)
 }

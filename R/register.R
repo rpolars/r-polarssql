@@ -7,7 +7,7 @@
 #' @param .overwrite Should an existing registration be overwritten?
 #' @return The polarssql connection invisibly.
 #' @export
-#' @examplesIf polars0::polars_info()$features$sql
+#' @examples
 #' con <- dbConnect(polarssql())
 #'
 #' polarssql_register(df1 = mtcars, df2 = mtcars, .conn = con)
@@ -56,6 +56,7 @@ polarssql_unregister <- function(names, conn = polarssql_default_connection()) {
     )
   }
 
-  context$unregister(names)
+  # TODO: unregister is not implemented yet
+  # context$unregister(names)
   invisible(conn)
 }
