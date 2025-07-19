@@ -56,7 +56,6 @@ polarssql_unregister <- function(names, conn = polarssql_default_connection()) {
     )
   }
 
-  # TODO: unregister is not implemented yet
-  # context$unregister(names)
+  context$unregister(names)
   invisible(conn)
 }
