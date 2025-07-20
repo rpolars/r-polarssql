@@ -23,6 +23,7 @@ Suggests:
     nanoarrow,
     patrick,
     testthat (>= 3.0.0),
+    tibble,
     DBItest (>= 1.7.3)
 Config/testthat/edition: 3
 Collate:
