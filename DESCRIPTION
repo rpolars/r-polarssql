@@ -15,7 +15,7 @@ Depends:
 Imports:
     DBI (>= 1.2.1),
     methods,
-    polars0 (>= 1.0.0),
+    polars (>= 1.0.0),
     rlang
 Suggests:
     dplyr,
@@ -23,6 +23,7 @@ Suggests:
     nanoarrow,
     patrick,
     testthat (>= 3.0.0),
+    tibble,
     DBItest (>= 1.7.3)
 Config/testthat/edition: 3
 Collate:

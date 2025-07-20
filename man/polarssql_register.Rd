@@ -30,7 +30,6 @@ The polarssql connection invisibly.
 Register data frames as tables
 }
 \examples{
-\dontshow{if (polars0::polars_info()$features$sql) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 con <- dbConnect(polarssql())
 
 polarssql_register(df1 = mtcars, df2 = mtcars, .conn = con)
@@ -38,5 +37,4 @@ con
 
 polarssql_unregister(c("df1", "df2"), conn = con)
 con
-\dontshow{\}) # examplesIf}
 }

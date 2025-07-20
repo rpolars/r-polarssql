@@ -12,13 +12,9 @@ NULL
 #' [polarssql()] creates a DBI driver instance.
 #'
 #' @export
-#' @examplesIf polars0::polars_info()$features$sql
+#' @examples
 #' polarssql()
 polarssql <- function() {
-  if (!isTRUE(polars0::polars_info()$features$sql)) {
-    stop("Please install the `polars` package with the sql feature.")
-  }
-
   new("polarssql_driver")
 }
 

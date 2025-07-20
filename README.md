@@ -21,7 +21,7 @@ supported SQL features.
 
 ## Installation
 
-The `{polars0}` R package and `{polarssql}` can be installed from
+The `{polars}` R package and `{polarssql}` can be installed from
 [R-universe](https://rpolars.r-universe.dev/):
 
 ``` r
@@ -72,7 +72,7 @@ dbClearResult(res)
 # We can use table functions to read files directly:
 tf <- tempfile(fileext = ".parquet")
 on.exit(unlink(tf))
-polars0::as_polars_lf(mtcars)$sink_parquet(tf)
+polars::as_polars_lf(mtcars)$sink_parquet(tf)
 
 dbGetQuery(con, paste0("SELECT * FROM read_parquet('", tf, "') ORDER BY mpg DESC LIMIT 3"))
 #>    mpg cyl disp hp drat    wt  qsec vs am gear carb
@@ -94,13 +94,7 @@ polarssql_register(df = mtcars)
 
 # Get the query result as a polars LazyFrame
 polarssql_query("SELECT * FROM df WHERE cyl = 4")
-#> polars LazyFrame
-#>  $explain(): Show the optimized query plan.
-#> 
-#> Naive plan:
-#>  SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM
-#>   FILTER [(col("cyl")) == (4.0)] FROM
-#>     DF ["mpg", "cyl", "disp", "hp"]; PROJECT */11 COLUMNS; SELECTION: None
+#> <polars_lazy_frame>
 
 # Unregister the table
 polarssql_unregister("df")
