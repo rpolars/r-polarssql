@@ -55,7 +55,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The <a href="https://rpolars.github.io/r-polars0/" class="external-link">polars0</a> R package and <a href="https://rpolars.github.io/r-polarssql/">polarssql</a> can be installed from <a href="https://rpolars.r-universe.dev/" class="external-link">R-universe</a>:</p>
+<p>The <a href="https://pola-rs.github.io/r-polars/" class="external-link">polars</a> R package and <a href="https://rpolars.github.io/r-polarssql/">polarssql</a> can be installed from <a href="https://rpolars.r-universe.dev/" class="external-link">R-universe</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NOT_CRAN <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span> <span class="co"># for installing the polars package with pre-built binary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"polarssql"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://rpolars.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -104,7 +104,7 @@
 <span><span class="co"># We can use table functions to read files directly:</span></span>
 <span><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".parquet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">polars0</span><span class="fu">::</span><span class="fu"><a href="https://rpolars.github.io/r-polars0/man/as_polars_lf.html" class="external-link">as_polars_lf</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">$</span><span class="fu">sink_parquet</span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span>
+<span><span class="fu">polars</span><span class="fu">::</span><span class="fu"><a href="https://pola-rs.github.io/r-polars/man/as_polars_lf.html" class="external-link">as_polars_lf</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">$</span><span class="fu">sink_parquet</span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"SELECT * FROM read_parquet('"</span>, <span class="va">tf</span>, <span class="st">"') ORDER BY mpg DESC LIMIT 3"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    mpg cyl disp hp drat    wt  qsec vs am gear carb</span></span>
@@ -122,13 +122,7 @@
 <span></span>
 <span><span class="co"># Get the query result as a polars LazyFrame</span></span>
 <span><span class="fu"><a href="reference/polarssql_query.html">polarssql_query</a></span><span class="op">(</span><span class="st">"SELECT * FROM df WHERE cyl = 4"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; polars LazyFrame</span></span>
-<span><span class="co">#&gt;  $explain(): Show the optimized query plan.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Naive plan:</span></span>
-<span><span class="co">#&gt;  SELECT [col("mpg"), col("cyl"), col("disp"), col("hp"), col("drat"), col("wt"), col("qsec"), col("vs"), col("am"), col("gear"), col("carb")] FROM</span></span>
-<span><span class="co">#&gt;   FILTER [(col("cyl")) == (4.0)] FROM</span></span>
-<span><span class="co">#&gt;     DF ["mpg", "cyl", "disp", "hp"]; PROJECT */11 COLUMNS; SELECTION: None</span></span>
+<span><span class="co">#&gt; &lt;polars_lazy_frame&gt;</span></span>
 <span></span>
 <span><span class="co"># Unregister the table</span></span>
 <span><span class="fu"><a href="reference/polarssql_register.html">polarssql_unregister</a></span><span class="op">(</span><span class="st">"df"</span><span class="op">)</span></span></code></pre></div>
